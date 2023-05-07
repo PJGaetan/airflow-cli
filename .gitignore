@@ -1,0 +1,6 @@
+/target
+/bin
+.DS_Store
+test/airflow-data
+test/docker-compose.yaml
+test/logs/
