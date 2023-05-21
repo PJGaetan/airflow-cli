@@ -6,6 +6,7 @@ package list
 import (
 	"encoding/json"
 	"os"
+	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
@@ -14,6 +15,8 @@ import (
 
 	"github.com/spf13/cobra"
 )
+
+var DagId string
 
 // listCmd represents the list command
 func NewList() *cobra.Command {
@@ -28,51 +31,40 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 		Run: list,
 	}
+	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	return &listCmd
 }
 
 func list(cmd *cobra.Command, args []string) {
-	response := request.AirflowGetRequest("dags")
-	var dag model.Dags
-	if err := json.Unmarshal([]byte(response), &dag); err != nil {
+	response := request.AirflowGetRequest("dags/" + DagId + "/tasks")
+	var tasks model.Tasks
+	if err := json.Unmarshal([]byte(response), &tasks); err != nil {
 		panic(err)
 	}
-	t := buildTable(dag)
+	t := buildTable(tasks)
 
 	t.Render()
 }
 
-func buildTable(dat model.Dags) table.Writer {
+func buildTable(dat model.Tasks) table.Writer {
 	t := table.NewWriter()
 	t = printer.InitTable(t)
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
-		"dag_id",
-		// "description",
-		// "file_token",
-		// "fileloc",
-		"is_active",
-		"is_paused",
-		// "s_subdag",
-		"owners",
-		// "root_dag_id",
-		"schedule_interval",
-		// "tags",
+		"task_id",
+		"operator",
+		"start_date",
+		"end_date",
+		"dowstream_task",
 	})
 	t.AppendSeparator()
-	for _, s := range dat.Dags {
+	for _, s := range dat.Task {
 		t.AppendRow([]interface{}{
-			s.Dag_id,
-			// s.Description,
-			// s.File_token,
-			// s.Fileloc,
-			s.Is_active,
-			s.Is_paused,
-			// s.S_subdag,
-			s.Owners,
-			// s.Root_dag_id,
-			s.Schedule_interval.Value,
-			// s.Tags,
+			s.TaskId,
+			s.ClassRef.ClassName,
+			s.StartDate.Format(time.RFC3339),
+			s.EndDate.Format(time.RFC3339),
+			string(s.DownstreamTaskIds),
 		})
 	}
 	return t

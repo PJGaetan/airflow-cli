@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 
@@ -15,7 +16,6 @@ import (
 	"golang.org/x/exp/slices"
 
 	"github.com/pjgaetan/airflow-cli/internal/config"
-	"github.com/pjgaetan/airflow-cli/pkg/model"
 )
 
 func MakeRequest(payload, url, method string, header []string) (string, error) {
@@ -51,7 +51,7 @@ func MakeRequest(payload, url, method string, header []string) (string, error) {
 	return bodyString, nil
 }
 
-func AirflowGetRequest(endpoint string) model.Dags {
+func AirflowGetRequest(endpoint string, params ...[2]string) json.RawMessage {
 	profile_name, auth_method, err := config.GetActiveProfile()
 	if err != nil {
 		log.Fatal("Error ", err)
@@ -70,39 +70,41 @@ func AirflowGetRequest(endpoint string) model.Dags {
 	}
 
 	// emptiness has been checked in GetActiveProfile
-	base_url := ini.String(profile_name + ".url")
-	if !strings.HasSuffix(base_url, "/") {
-		base_url = base_url + "/"
+	baseUrl := ini.String(profile_name + ".url")
+	if !strings.HasSuffix(baseUrl, "/") {
+		baseUrl = baseUrl + "/"
 	}
-	url := base_url + endpoint
+	baseUrl = baseUrl + endpoint
+
+	// construct url
+	queryParams := url.Values{}
+
+	u, _ := url.ParseRequestURI(baseUrl)
+	for _, param := range params {
+		queryParams.Add(param[0], param[1])
+	}
+	u.RawQuery = queryParams.Encode()
 
 	response, err := MakeRequest(
 		"",
-		url,
+		u.String(),
 		"GET",
 		header[:],
 	)
 	if err != nil {
 		log.Fatal("Error ", err)
 	}
-	var encapsulation map[string]interface{}
+	var encapsulation map[string]json.RawMessage
 	if err := json.Unmarshal([]byte(response), &encapsulation); err != nil {
 		panic(err)
 	}
 	keys := maps.Keys(encapsulation)
-	var dag model.Dags
 	if slices.Contains(keys, "response") {
-		var dat model.ResponseDag
-
-		if err := json.Unmarshal([]byte(response), &dat); err != nil {
-			panic(err)
-		}
-		dag = dat.Response
-
-	} else {
-		if err := json.Unmarshal([]byte(response), &dag); err != nil {
-			panic(err)
-		}
+		return encapsulation["response"]
 	}
-	return dag
+	var r json.RawMessage
+	if err := json.Unmarshal([]byte(response), &r); err != nil {
+		panic(err)
+	}
+	return r
 }

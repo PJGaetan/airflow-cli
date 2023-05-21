@@ -6,6 +6,8 @@ package list
 import (
 	"encoding/json"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
@@ -13,6 +15,12 @@ import (
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 
 	"github.com/spf13/cobra"
+)
+
+var (
+	DagId   string
+	Limit   int
+	OrderBy string
 )
 
 // listCmd represents the list command
@@ -28,51 +36,48 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 		Run: list,
 	}
+	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
+	listCmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
+	listCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
 	return &listCmd
 }
 
 func list(cmd *cobra.Command, args []string) {
-	response := request.AirflowGetRequest("dags")
-	var dag model.Dags
-	if err := json.Unmarshal([]byte(response), &dag); err != nil {
+	response := request.AirflowGetRequest("dags/"+DagId+"/dagRuns", [2]string{"limit", strconv.Itoa(Limit)}, [2]string{"order_by", OrderBy})
+	var dagRun model.DagRuns
+	if err := json.Unmarshal([]byte(response), &dagRun); err != nil {
 		panic(err)
 	}
-	t := buildTable(dag)
+	t := buildTable(dagRun)
 
 	t.Render()
 }
 
-func buildTable(dat model.Dags) table.Writer {
+func buildTable(dat model.DagRuns) table.Writer {
 	t := table.NewWriter()
 	t = printer.InitTable(t)
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
 		"dag_id",
-		// "description",
-		// "file_token",
-		// "fileloc",
-		"is_active",
-		"is_paused",
-		// "s_subdag",
-		"owners",
-		// "root_dag_id",
-		"schedule_interval",
-		// "tags",
+		"dag_run_id",
+		"extrnale_trigger",
+		"state",
+		"start_date",
+		"end_date",
+		// "conf",
 	})
 	t.AppendSeparator()
-	for _, s := range dat.Dags {
+	for _, s := range dat.DagRun {
 		t.AppendRow([]interface{}{
 			s.Dag_id,
-			// s.Description,
-			// s.File_token,
-			// s.Fileloc,
-			s.Is_active,
-			s.Is_paused,
-			// s.S_subdag,
-			s.Owners,
-			// s.Root_dag_id,
-			s.Schedule_interval.Value,
-			// s.Tags,
+			s.Dag_run_id,
+			s.External_trigger,
+			s.State,
+			s.Start_date.Format(time.RFC3339),
+			s.End_date.Format(time.RFC3339),
+			// s.Execution_date,
+			// s.Logical_date,
+			// s.Conf,
 		})
 	}
 	return t

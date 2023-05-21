@@ -4,6 +4,7 @@ type Dags struct {
 	Dags         []Dag `json:"dags"`
 	TotalEntries int   `json:"total_entries"`
 }
+
 type ResponseDag struct {
 	Response Dags   `json:"response"`
 	Status   string `json:"stat"`

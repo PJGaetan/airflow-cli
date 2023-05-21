@@ -45,7 +45,7 @@ func init() {
 	}
 	ini.New()
 	ini.WithOptions(ini.ParseEnv, ini.ParseVar, func(opts *ini.Options) {
-		opts.DefSection = "default"
+		opts.DefSection = "__default"
 	})
 
 	err := ini.LoadExists(config)

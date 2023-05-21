@@ -4,10 +4,12 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package list
 
 import (
-	"fmt"
+	"os"
 
 	"github.com/gookit/ini/v2"
+	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/internal/config"
+	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/spf13/cobra"
 )
 
@@ -27,5 +29,38 @@ func profile(cmd *cobra.Command, args []string) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(config.GetProfiles())
+	t := buildTable(config.GetProfiles())
+	t.Render()
+
+	// fmt.Println(config.GetProfiles())
+}
+
+func buildTable(profiles map[string]ini.Section) table.Writer {
+	t := table.NewWriter()
+	t = printer.InitTable(t)
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{
+		"type",
+		"name",
+		"endpoint",
+		"user",
+		"isShellToken",
+	})
+	t.AppendSeparator()
+	for name, profile := range profiles {
+		var typeProfile string
+		if _, ok := profile["user"]; ok {
+			typeProfile = "user/password"
+		} else {
+			typeProfile = "jwt"
+		}
+		t.AppendRow([]interface{}{
+			typeProfile,
+			name,
+			profile["url"],
+			profile["user"],
+			profile["isShell"],
+		})
+	}
+	return t
 }
