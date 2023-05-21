@@ -2,12 +2,8 @@
 
 TODO: 
 
-- profile 
-	- list : better viz
-	- remove
-	- edit
-- dags
-- tasks
+- Improve readme
+- Fill the command docstrings
 
 To use test makefile and spin up any airflow version.
 
