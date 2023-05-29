@@ -6,12 +6,14 @@ package list
 import (
 	"encoding/json"
 	"os"
+	"reflect"
 	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
+	"github.com/pjgaetan/airflow-cli/pkg/prompt"
 
 	"github.com/spf13/cobra"
 )
@@ -36,6 +38,17 @@ to quickly create a Cobra application.`,
 }
 
 func list(cmd *cobra.Command, args []string) {
+	if DagId == "" {
+		dag, err := prompt.PromptDag()
+		if err != nil {
+			panic(err)
+		}
+		if reflect.DeepEqual(dag, model.Dag{}) {
+			os.Exit(0)
+		}
+		DagId = dag.Dag_id
+	}
+
 	response := request.AirflowGetRequest("dags/" + DagId + "/tasks")
 	var tasks model.Tasks
 	if err := json.Unmarshal([]byte(response), &tasks); err != nil {

@@ -6,6 +6,7 @@ package list
 import (
 	"encoding/json"
 	"os"
+	"reflect"
 	"strconv"
 	"time"
 
@@ -13,6 +14,7 @@ import (
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
+	"github.com/pjgaetan/airflow-cli/pkg/prompt"
 
 	"github.com/spf13/cobra"
 )
@@ -27,14 +29,8 @@ var (
 func NewList() *cobra.Command {
 	listCmd := cobra.Command{
 		Use:   "list",
-		Short: "A brief description of your command",
-		Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-		Run: list,
+		Short: "List dag runs",
+		Run:   list,
 	}
 	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	listCmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
@@ -43,6 +39,17 @@ to quickly create a Cobra application.`,
 }
 
 func list(cmd *cobra.Command, args []string) {
+	if DagId == "" {
+		dag, err := prompt.PromptDag()
+		if err != nil {
+			panic(err)
+		}
+		if reflect.DeepEqual(dag, model.Dag{}) {
+			os.Exit(0)
+		}
+		DagId = dag.Dag_id
+	}
+
 	response := request.AirflowGetRequest("dags/"+DagId+"/dagRuns", [2]string{"limit", strconv.Itoa(Limit)}, [2]string{"order_by", OrderBy})
 	var dagRun model.DagRuns
 	if err := json.Unmarshal([]byte(response), &dagRun); err != nil {

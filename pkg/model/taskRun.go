@@ -24,7 +24,7 @@ type TaskInstance struct {
 	PoolSlots      float64         `json:"pool_slots"`
 	PriorityWeight float64         `json:"priority_weight"`
 	Queue          string          `json:"queue"`
-	QueuedWhen     string          `json:"queued_when"`
+	QueuedWhen     time.Time       `json:"queued_when"`
 	Sla_miss       string          `json:"sla_miss"`
 	StartDate      time.Time       `json:"start_date"`
 	State          string          `json:"state"`

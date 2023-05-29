@@ -16,8 +16,8 @@ type DagRun struct {
 	Dag_run_id       string          `json:"dag_run_id"`
 	External_trigger bool            `json:"external_trigger"`
 	State            string          `json:"state"`
-	End_date         time.Time       `json:"end_date"`
 	Execution_date   time.Time       `json:"execution_date"`
 	Logical_date     time.Time       `json:"logical_date"`
 	Start_date       time.Time       `json:"start_date"`
+	End_date         time.Time       `json:"end_date"`
 }

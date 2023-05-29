@@ -3,7 +3,6 @@ package config
 import (
 	"encoding/base64"
 	"errors"
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -13,6 +12,7 @@ import (
 	"github.com/gookit/ini/v2"
 	"github.com/mitchellh/go-homedir"
 	"github.com/pjgaetan/airflow-cli/internal/flag"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 	"golang.org/x/exp/slices"
 )
 
@@ -38,8 +38,7 @@ func init() {
 	if config == "" {
 		home, err := homedir.Dir()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", err))
-			os.Exit(1)
+			utils.Failed("Error", err)
 		}
 		config = home + "/.config/.airflow/.config"
 	}
@@ -62,8 +61,7 @@ func GetJwtProfile(profile_name string) ProfileJwt {
 	p := ini.StringMap(profile_name)
 	isShell, err := strconv.ParseBool(p["isShell"])
 	if err != nil {
-		fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", "Not a valable isShell bool for "+profile_name))
-		os.Exit(1)
+		utils.Failed("Not a valable isShell bool for " + profile_name)
 	}
 	profile := ProfileJwt{
 		url:     p["url"],
@@ -86,13 +84,11 @@ func GetUserPasswordProfile(profile_name string) ProfileUserPassword {
 func GetActiveProfile() (string, string, error) {
 	profile_name := flag.Flag
 	if !slices.Contains(ini.SectionKeys(true), profile_name) {
-		fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", "no such a profile "+profile_name))
-		os.Exit(1)
+		utils.Failed("no such a profile " + profile_name)
 	}
 
 	if ini.String(profile_name+".url") == "" {
-		fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", "No url defined for this profile."))
-		os.Exit(1)
+		utils.Failed("No url defined for this profile.")
 	}
 
 	if ini.String(profile_name+".isShell") != "" && ini.String(profile_name+".token") != "" {
@@ -132,15 +128,9 @@ func WriteConfig() {
 	// no config yet
 	if _, err := os.Stat(config); errors.Is(err, os.ErrNotExist) {
 		_, err = create(config)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", err))
-			os.Exit(1)
-		}
+		utils.ExitIfError(err)
 	}
 
 	_, err := ini.Default().WriteToFile(config)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", err))
-		os.Exit(1)
-	}
+	utils.ExitIfError(err)
 }

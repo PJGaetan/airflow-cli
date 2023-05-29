@@ -5,12 +5,12 @@ package create
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/gookit/ini/v2"
 	"github.com/pjgaetan/airflow-cli/internal/config"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +18,7 @@ import (
 func NewCreate() *cobra.Command {
 	createCmd := cobra.Command{
 		Use:   "create",
-		Short: "A brief description of your command",
+		Short: "Create a profile to connect to airflow REST API",
 		Long:  ``,
 		Run:   create,
 	}
@@ -68,8 +68,7 @@ func create(cmd *cobra.Command, args []string) {
 			}
 			survey.AskOne(prompt, &override)
 			if !override {
-				fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", "Choosing not to override.\nRerun command to specify another profile name."))
-				os.Exit(1)
+				utils.Failed("Choosing not to override.\nRerun command to specify another profile name.")
 			}
 		}
 	}

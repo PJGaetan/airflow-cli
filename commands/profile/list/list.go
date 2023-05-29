@@ -17,7 +17,7 @@ import (
 func NewList() *cobra.Command {
 	cmd := cobra.Command{
 		Use:   "list",
-		Short: "List create profiles",
+		Short: "List profiles",
 		Long:  ``,
 		Run:   profile,
 	}

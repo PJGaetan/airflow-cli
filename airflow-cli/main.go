@@ -4,16 +4,13 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package main
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/pjgaetan/airflow-cli/commands"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 )
 
 func main() {
 	cmd := commands.NewRootCmd()
 	if _, err := cmd.ExecuteC(); err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(1)
+		utils.ExitIfError(err)
 	}
 }
