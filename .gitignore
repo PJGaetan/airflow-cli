@@ -4,3 +4,5 @@
 test/airflow-data
 test/docker-compose.yaml
 test/logs/
+
+dist/
