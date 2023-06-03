@@ -6,6 +6,7 @@ import (
 	"github.com/pjgaetan/airflow-cli/commands/dag"
 	"github.com/pjgaetan/airflow-cli/commands/profile"
 	"github.com/pjgaetan/airflow-cli/commands/task"
+	"github.com/pjgaetan/airflow-cli/commands/version"
 	"github.com/pjgaetan/airflow-cli/internal/flag"
 )
 
@@ -29,6 +30,7 @@ func NewRootCmd() *cobra.Command {
 		profile.NewProfile(),
 		dag.NewDag(),
 		task.NewTask(),
+		version.NewCmdVersion(),
 	)
 	return &rootCmd
 }
