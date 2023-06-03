@@ -1,0 +1,41 @@
+run:
+  timeout: 5m
+  deadline: 5m
+  skip-dirs-use-default: true
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dupl
+    - errcheck
+    - gocritic
+    - gocyclo
+    - gofmt
+    - goimports
+    - revive
+    - godot
+    - gomnd
+    - gosimple
+    - govet
+    - ineffassign
+    - prealloc
+    - unparam
+    - unused
+  fast: false
+linters-settings:
+  gofmt:
+    simplify: false
+  testpackage:
+    skip-regexp: ".*"
+  gocyclo:
+    min-complexity: 20
+  revive:
+    rules:
+      - name: package-comments
+        disabled: true
+  gomnd:
+    settings:
+      mnd:
+        ignored-numbers: 0,1,2,3
+issues:
+  exclude-use-default: false

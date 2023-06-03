@@ -94,6 +94,14 @@ airflow-cli task logs -d dag_id -r dag_run_id
 
 ## Contribute
 
+### Tools
+
+To run linting, install [golang-lint](https://golangci-lint.run/usage/install/).
+
+```sh
+make lint
+```
+
 ### Test
 
 Use test makefile to spin up any airflow version.
