@@ -6,3 +6,5 @@ test/docker-compose.yaml
 test/logs/
 
 dist/
+vendor/
+.gitconfig
