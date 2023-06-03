@@ -11,10 +11,8 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/pjgaetan/airflow-cli/commands/dag"
-	dagRrun "github.com/pjgaetan/airflow-cli/commands/dagRun"
 	"github.com/pjgaetan/airflow-cli/commands/profile"
 	"github.com/pjgaetan/airflow-cli/commands/task"
-	"github.com/pjgaetan/airflow-cli/commands/taskInstance"
 	"github.com/pjgaetan/airflow-cli/internal/flag"
 	"github.com/pjgaetan/airflow-cli/pkg/utils"
 )
@@ -47,8 +45,6 @@ func NewRootCmd() *cobra.Command {
 		profile.NewProfile(),
 		dag.NewDag(),
 		task.NewTask(),
-		dagRrun.NewRun(),
-		taskInstance.NewRun(),
 	)
 	return &rootCmd
 }

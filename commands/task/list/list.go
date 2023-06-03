@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"os"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
@@ -24,14 +25,8 @@ var DagId string
 func NewList() *cobra.Command {
 	listCmd := cobra.Command{
 		Use:   "list",
-		Short: "A brief description of your command",
-		Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-		Run: list,
+		Short: "List task of a specific dag",
+		Run:   list,
 	}
 	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	return &listCmd
@@ -77,7 +72,7 @@ func buildTable(dat model.Tasks) table.Writer {
 			s.ClassRef.ClassName,
 			s.StartDate.Format(time.RFC3339),
 			s.EndDate.Format(time.RFC3339),
-			string(s.DownstreamTaskIds),
+			"[" + strings.Join(s.DownstreamTaskIds[:], ",") + "]",
 		})
 	}
 	return t

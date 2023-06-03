@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
-	github.com/gookit/goutil v0.6.7
+	github.com/davecgh/go-spew v1.1.1
 	github.com/gookit/ini/v2 v2.2.2
 	github.com/jedib0t/go-pretty/v6 v6.4.6
 	github.com/mitchellh/go-homedir v1.1.0
@@ -15,9 +15,10 @@ require (
 )
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/awalterschulze/gographviz v2.0.3+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gookit/color v1.5.2 // indirect
+	github.com/gookit/goutil v0.6.7 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect

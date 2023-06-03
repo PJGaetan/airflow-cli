@@ -18,7 +18,7 @@ type ClassRef struct {
 type Task struct {
 	ClassRef                ClassRef        `json:"class_ref"`
 	DependsOnPast           bool            `json:"depends_on_past"`
-	DownstreamTaskIds       json.RawMessage `json:"downstream_task_ids"`
+	DownstreamTaskIds       []string        `json:"downstream_task_ids"`
 	EndDate                 time.Time       `json:"end_date"`
 	ExecutionTimeout        string          `json:"execution_timeout"`
 	ExtraLinks              json.RawMessage `json:"extra_links"`

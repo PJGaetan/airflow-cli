@@ -1,4 +1,4 @@
-package clear
+package clearInstance
 
 import (
 	"encoding/json"
@@ -28,7 +28,7 @@ var (
 // listCmd represents the list command
 func NewClear() *cobra.Command {
 	clearCmd := cobra.Command{
-		Use:   "clear",
+		Use:   "clear-instance",
 		Short: "Clear task instances",
 		Run:   clear,
 	}

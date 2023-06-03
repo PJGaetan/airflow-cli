@@ -1,7 +1,4 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
-package list
+package listRuns
 
 import (
 	"encoding/json"
@@ -26,19 +23,19 @@ var (
 )
 
 // listCmd represents the list command
-func NewList() *cobra.Command {
-	listCmd := cobra.Command{
-		Use:   "list",
+func NewListRuns() *cobra.Command {
+	cmd := cobra.Command{
+		Use:   "list-runs",
 		Short: "List dag runs",
-		Run:   list,
+		Run:   cmd,
 	}
-	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
-	listCmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
-	listCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
-	return &listCmd
+	cmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
+	cmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
+	cmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
+	return &cmd
 }
 
-func list(cmd *cobra.Command, args []string) {
+func cmd(cmd *cobra.Command, args []string) {
 	if DagId == "" {
 		dag, err := prompt.PromptDag()
 		if err != nil {

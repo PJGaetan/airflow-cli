@@ -13,6 +13,7 @@ The code as been greatly inspired by [glab](https://gitlab.com/gitlab-org/cli/-/
 - Correctly escape with crtl+d [x]
 - Write quickstart README [x]
 - Output DAG with [diagon](https://github.com/ArthurSonzogni/Diagon) and [natural C biding](https://pkg.go.dev/cmd/cgo)
+	- Graph-Easy : https://stackoverflow.com/a/3391213
 
 ## Quickstart
 
@@ -30,13 +31,66 @@ you can choose between two kind of authentication :
 
 In case of a jwt auth you can choose to use a shell command to retrieve the jwt token instead of directly providing it.
 
-### Dag status
+## Commands
 
-Get a brief overview of your dags status with :
+### Dag
+
+The `dag` command allow you to access dags and dag runs resources. They are by default sorted by `-date_start`.
 
 ```sh
-airflow-cli dag-run status
+# list dags
+airflow-cli dag list
+
+# list dag run (prompt will ask for which dag_id)
+airflow-cli dag list-run
+
+# list dag run for dag_id 
+airflow-cli dag list-run -d dag_id
+
+# trigger a dag run for dag_id 
+airflow-cli dag trigger -d dag_id
+
+# get status of dag runs, tasks associated and log of a task instance
+airflow-cli dag trigger -d dag_id
 ```
+
+
+### Dag graph
+
+To get a [graphviz](https://graphviz.org/) representation of the graph.
+```sh 
+airflow-cli dag graph
+```
+
+You can use `graph-easy` to plot an asci art in your terminal. Installation instruction [here](https://stackoverflow.com/questions/3211801/graphviz-and-ascii-output/3391213).
+
+```sh
+airflow-cli dag graph -d tutorial_dag | graph-easy --from=graphviz --as=boxart
+
+              tutorial_dag
+
+╭─────────╮     ╭───────────╮     ╭──────╮
+│ extract │ ──▶ │ transform │ ──▶ │ load │
+╰─────────╯     ╰───────────╯     ╰──────╯
+
+```
+
+### Task
+
+```sh
+# list tasks of a dag (prompt will ask to choose a dag)
+airflow-cli task list
+
+# list tasks instance of a dag run
+airflow-cli task list
+
+# list tasks instance of a dag run with no prompt
+airflow-cli task list -d dag_id -r dag_run_id
+
+# get logs from a task instance
+airflow-cli task logs -d dag_id -r dag_run_id
+```
+
 
 ## Contribute
 

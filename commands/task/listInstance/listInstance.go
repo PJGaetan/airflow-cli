@@ -1,4 +1,4 @@
-package list
+package listInstance
 
 import (
 	"encoding/json"
@@ -24,10 +24,10 @@ var (
 )
 
 // listCmd represents the list command
-func NewList() *cobra.Command {
+func NewListInstance() *cobra.Command {
 	listCmd := cobra.Command{
-		Use:   "list",
-		Short: "List task instances",
+		Use:   "list-instance",
+		Short: "List task instances linked to a particular dag run",
 		Run:   list,
 	}
 	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")

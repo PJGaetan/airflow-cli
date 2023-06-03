@@ -1,4 +1,4 @@
-package set
+package setInstance
 
 import (
 	"encoding/json"
@@ -27,8 +27,8 @@ var (
 // listCmd represents the list command
 func NewSet() *cobra.Command {
 	stateCmd := cobra.Command{
-		Use:   "set",
-		Short: "Sew task instances state",
+		Use:   "set-instance",
+		Short: "Set task instances state (success,failed)",
 		Run:   state,
 	}
 	stateCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
