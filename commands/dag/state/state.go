@@ -19,7 +19,7 @@ var (
 	OrderBy string
 )
 
-// listCmd represents the list command
+// NewState represents the list command.
 func NewState() *cobra.Command {
 	cmd := cobra.Command{
 		Use:   "state",
@@ -45,7 +45,7 @@ func cmd(cmd *cobra.Command, args []string) {
 
 		dagIds := make([]string, len(dags.Dags))
 		for index, dag := range dags.Dags {
-			dagIds[index] = dag.Dag_id
+			dagIds[index] = dag.DagId
 		}
 
 		prompt := &survey.Select{
@@ -53,8 +53,8 @@ func cmd(cmd *cobra.Command, args []string) {
 			Options: dagIds,
 			Description: func(value string, index int) string {
 				for _, d := range dags.Dags {
-					if d.Dag_id == value {
-						if d.Is_paused == true {
+					if d.DagId == value {
+						if d.IsPaused {
 							return "paused"
 						}
 						return "not paused"
@@ -64,7 +64,8 @@ func cmd(cmd *cobra.Command, args []string) {
 			},
 		}
 
-		survey.AskOne(prompt, &DagId)
+		err := survey.AskOne(prompt, &DagId)
+		utils.ExitIfError(err)
 	}
 	if DagId == "" {
 		os.Exit(0)
@@ -76,7 +77,9 @@ func cmd(cmd *cobra.Command, args []string) {
 		Options: []string{"paused", "unpaused"},
 	}
 
-	survey.AskOne(promptTodo, &todo)
+	err := survey.AskOne(promptTodo, &todo)
+	utils.ExitIfError(err)
+
 	if todo == "" {
 		os.Exit(0)
 	}

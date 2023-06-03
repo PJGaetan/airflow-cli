@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package list
 
 import (
@@ -8,20 +5,20 @@ import (
 	"os"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
 
 var DagId string
 
-// listCmd represents the list command
+// listCmd represents the list command.
 func NewList() *cobra.Command {
 	listCmd := cobra.Command{
 		Use:   "list",
@@ -41,7 +38,7 @@ func list(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	response := request.AirflowGetRequest("dags/" + DagId + "/tasks")
@@ -63,6 +60,8 @@ func buildTable(dat model.Tasks) table.Writer {
 		"operator",
 		"start_date",
 		"end_date",
+		"trigger_rule",
+		"retry",
 		"dowstream_task",
 	})
 	t.AppendSeparator()
@@ -70,9 +69,11 @@ func buildTable(dat model.Tasks) table.Writer {
 		t.AppendRow([]interface{}{
 			s.TaskId,
 			s.ClassRef.ClassName,
-			s.StartDate.Format(time.RFC3339),
-			s.EndDate.Format(time.RFC3339),
-			"[" + strings.Join(s.DownstreamTaskIds[:], ",") + "]",
+			utils.FormatDate(s.StartDate),
+			utils.FormatDate(s.EndDate),
+			s.TriggerRule,
+			s.Retries,
+			"[" + strings.Join(s.DownstreamTaskIds, ",") + "]",
 		})
 	}
 	return t

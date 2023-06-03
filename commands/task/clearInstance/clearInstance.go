@@ -11,6 +11,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
 	"github.com/pjgaetan/airflow-cli/pkg/utils"
@@ -25,7 +26,7 @@ var (
 	OrderBy  string
 )
 
-// listCmd represents the list command
+// NewClear represents the list command.
 func NewClear() *cobra.Command {
 	clearCmd := cobra.Command{
 		Use:   "clear-instance",
@@ -35,7 +36,7 @@ func NewClear() *cobra.Command {
 	clearCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	clearCmd.Flags().StringVarP(&DagRunId, "dag-run-id", "r", "", "dag id")
 	clearCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
-	clearCmd.Flags().IntVarP(&Limit, "limit", "l", 20, "The numbers of items to return.")
+	clearCmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	return &clearCmd
 }
 
@@ -48,7 +49,7 @@ func clear(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	if DagRunId == "" {
@@ -59,7 +60,7 @@ func clear(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(run, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagRunId = run.Dag_run_id
+		DagRunId = run.DagRunId
 	}
 
 	responseTask := request.AirflowGetRequest("dags/" + DagId + "/dagRuns/" + DagRunId + "/taskInstances")
@@ -97,7 +98,8 @@ func clear(cmd *cobra.Command, args []string) {
 			return ""
 		},
 	}
-	survey.AskOne(promptTask, &taskId)
+	err := survey.AskOne(promptTask, &taskId)
+	utils.ExitIfError(err)
 	if taskId == "" {
 		return
 	}
@@ -118,7 +120,8 @@ func clear(cmd *cobra.Command, args []string) {
 		Message: "What parameters to apply?",
 		Options: []string{"include_upstream", "include_downstream"},
 	}
-	survey.AskOne(promptParams, &params)
+	err = survey.AskOne(promptParams, &params)
+	utils.ExitIfError(err)
 
 	mapParams := make(map[string]any)
 	// Default params

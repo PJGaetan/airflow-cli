@@ -12,8 +12,10 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -36,7 +38,7 @@ func NewLogs() *cobra.Command {
 	logsCmd.Flags().StringVarP(&DagRunId, "dag-run-id", "r", "", "dag run id")
 	logsCmd.Flags().StringVarP(&DagRunId, "task", "t", "", "task id")
 	logsCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
-	logsCmd.Flags().IntVarP(&Limit, "limit", "l", 20, "The numbers of items to return.")
+	logsCmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	return &logsCmd
 }
 
@@ -49,7 +51,7 @@ func logs(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	if DagRunId == "" {
@@ -60,7 +62,7 @@ func logs(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(run, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagRunId = run.Dag_run_id
+		DagRunId = run.DagRunId
 	}
 
 	responseTask := request.AirflowGetRequest("dags/" + DagId + "/dagRuns/" + DagRunId + "/taskInstances")
@@ -99,7 +101,8 @@ func logs(cmd *cobra.Command, args []string) {
 			return ""
 		},
 	}
-	survey.AskOne(promptLogs, &taskInstanceId)
+	err := survey.AskOne(promptLogs, &taskInstanceId)
+	utils.ExitIfError(err)
 
 	var instance model.TaskInstance
 	for _, i := range instances {
@@ -123,7 +126,8 @@ func logs(cmd *cobra.Command, args []string) {
 			Options: s,
 			Default: '1',
 		}
-		survey.AskOne(promptLogsNumber, &logNumber)
+		err := survey.AskOne(promptLogsNumber, &logNumber)
+		utils.ExitIfError(err)
 	} else {
 		logNumber = "1"
 	}

@@ -6,16 +6,18 @@ package list
 import (
 	"encoding/json"
 	"os"
+	"strings"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
 
-// listCmd represents the list command
+// listCmd represents the list command.
 func NewList() *cobra.Command {
 	listCmd := cobra.Command{
 		Use:   "list",
@@ -42,31 +44,28 @@ func buildTable(dat model.Dags) table.Writer {
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{
 		"dag_id",
-		// "description",
-		// "file_token",
-		// "fileloc",
-		"is_active",
-		"is_paused",
-		// "s_subdag",
-		"owners",
-		// "root_dag_id",
 		"schedule_interval",
-		// "tags",
+		"next_dagrun",
+		"is_paused",
+		"tags",
+		"owners",
 	})
 	t.AppendSeparator()
 	for _, s := range dat.Dags {
+
+		tags := make([]string, len(s.Tags))
+		for index, t := range s.Tags {
+			tags[index] = t.Tag
+		}
+		tagsFormated := "[" + strings.Join(tags, ",") + "]"
+
 		t.AppendRow([]interface{}{
-			s.Dag_id,
-			// s.Description,
-			// s.File_token,
-			// s.Fileloc,
-			s.Is_active,
-			s.Is_paused,
-			// s.S_subdag,
+			s.DagId,
+			s.ScheduleInterval.Value,
+			utils.FormatDate(s.NextDagrun),
+			s.IsPaused,
+			tagsFormated,
 			s.Owners,
-			// s.Root_dag_id,
-			s.Schedule_interval.Value,
-			// s.Tags,
 		})
 	}
 	return t

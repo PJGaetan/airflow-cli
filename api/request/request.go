@@ -49,13 +49,16 @@ func MakeRequest(payload, url, method string, header []string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer func() {
+		err := resp.Body.Close()
+		utils.ExitIfError(err)
+	}()
 
 	bodyBytes, _ := io.ReadAll(resp.Body)
 	bodyString := string(bodyBytes)
 
-	// Success is indicated with 2xx status codes:
-	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
+	const SUCCESS_CODE_LOWER_BOUND, SUCCESS_CODE_UPPER_BOUND = 200, 300
+	statusOK := resp.StatusCode >= SUCCESS_CODE_LOWER_BOUND && resp.StatusCode < SUCCESS_CODE_UPPER_BOUND
 	if !statusOK {
 		var error errorResponse
 		if err := json.Unmarshal([]byte(bodyString), &error); err != nil {
@@ -74,23 +77,25 @@ func AirflowGetRequest(endpoint string, params ...[2]string) json.RawMessage {
 		log.Fatal("Error ", err)
 	}
 	var header [1]string
-	if auth_method == "user/password" {
+
+	switch auth_method {
+	case "user/password":
 		profile := config.GetUserPasswordProfile(profile_name)
 		header = [1]string{"Authorization: Basic " + config.BasicAuth(profile)}
-	} else if auth_method == "jwt" {
+	case "jwt":
 		profile := config.GetJwtProfile(profile_name)
 		token := config.GetToken(profile)
 		header = [1]string{"Authorization: Bearer " + token}
-	} else {
+	default:
 		utils.Failed("no such possibility")
 	}
 
 	// emptiness has been checked in GetActiveProfile
 	baseUrl := ini.String(profile_name + ".url")
 	if !strings.HasSuffix(baseUrl, "/") {
-		baseUrl = baseUrl + "/"
+		baseUrl += "/"
 	}
-	baseUrl = baseUrl + endpoint
+	baseUrl += endpoint
 
 	// construct url
 	queryParams := url.Values{}
@@ -131,14 +136,15 @@ func AirflowPostRequest(endpoint string, payload string) json.RawMessage {
 		log.Fatal("Error ", err)
 	}
 	var header [2]string
-	if auth_method == "user/password" {
+	switch auth_method {
+	case "user/password":
 		profile := config.GetUserPasswordProfile(profile_name)
 		header[0] = "Authorization: Basic " + config.BasicAuth(profile)
-	} else if auth_method == "jwt" {
+	case "jwt":
 		profile := config.GetJwtProfile(profile_name)
 		token := config.GetToken(profile)
 		header[0] = "Authorization: Bearer " + token
-	} else {
+	default:
 		utils.Failed("no such possibility")
 	}
 	header[1] = "Content-Type: application/json"
@@ -146,9 +152,9 @@ func AirflowPostRequest(endpoint string, payload string) json.RawMessage {
 	// emptiness has been checked in GetActiveProfile
 	baseUrl := ini.String(profile_name + ".url")
 	if !strings.HasSuffix(baseUrl, "/") {
-		baseUrl = baseUrl + "/"
+		baseUrl += "/"
 	}
-	baseUrl = baseUrl + endpoint
+	baseUrl += endpoint
 
 	response, err := MakeRequest(
 		payload,
@@ -181,14 +187,15 @@ func AirflowPatchRequest(endpoint string, payload string, params ...[2]string) j
 		log.Fatal("Error ", err)
 	}
 	var header [2]string
-	if auth_method == "user/password" {
+	switch auth_method {
+	case "user/password":
 		profile := config.GetUserPasswordProfile(profile_name)
 		header[0] = "Authorization: Basic " + config.BasicAuth(profile)
-	} else if auth_method == "jwt" {
+	case "jwt":
 		profile := config.GetJwtProfile(profile_name)
 		token := config.GetToken(profile)
 		header[0] = "Authorization: Bearer " + token
-	} else {
+	default:
 		utils.Failed("no such possibility")
 	}
 	header[1] = "Content-Type: application/json"
@@ -196,9 +203,9 @@ func AirflowPatchRequest(endpoint string, payload string, params ...[2]string) j
 	// emptiness has been checked in GetActiveProfile
 	baseUrl := ini.String(profile_name + ".url")
 	if !strings.HasSuffix(baseUrl, "/") {
-		baseUrl = baseUrl + "/"
+		baseUrl += "/"
 	}
-	baseUrl = baseUrl + endpoint
+	baseUrl += endpoint
 
 	// construct url
 	queryParams := url.Values{}

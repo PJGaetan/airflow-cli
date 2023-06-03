@@ -20,7 +20,7 @@ var (
 	OrderBy string
 )
 
-// listCmd represents the list command
+// NewGraph represents the graph command.
 func NewGraph() *cobra.Command {
 	cmd := cobra.Command{
 		Use:   "graph",
@@ -41,7 +41,7 @@ func cmd(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 	response := request.AirflowGetRequest("dags/" + DagId + "/tasks")
 	var tasks model.Tasks
@@ -52,12 +52,18 @@ func cmd(cmd *cobra.Command, args []string) {
 		utils.Failed("No task in this dag")
 	}
 	graph := gographviz.NewGraph()
-	graph.AddAttr(graph.Name, "label", DagId)
-	graph.AddAttr(graph.Name, "labelloc", "t")
-	graph.AddAttr(graph.Name, "rankdir", "LR")
-	// [label=tutorial_dag labelloc=t rankdir=LR]
-	graph.SetName(DagId)
-	graph.SetDir(true)
+	err := graph.AddAttr(graph.Name, "label", DagId)
+	utils.ExitIfError(err)
+	err = graph.AddAttr(graph.Name, "labelloc", "t")
+	utils.ExitIfError(err)
+	err = graph.AddAttr(graph.Name, "rankdir", "LR")
+	utils.ExitIfError(err)
+
+	err = graph.SetName(DagId)
+	utils.ExitIfError(err)
+	err = graph.SetDir(true)
+	utils.ExitIfError(err)
+
 	for _, t := range tasks.Task {
 		attr := make(map[string]string)
 		attr["color"] = "\"#000000\""
@@ -66,9 +72,11 @@ func cmd(cmd *cobra.Command, args []string) {
 		attr["shape"] = "rectangle"
 		attr["style"] = "\"filled,rounded\""
 
-		graph.AddNode(DagId, t.TaskId, attr)
+		err := graph.AddNode(DagId, t.TaskId, attr)
+		utils.ExitIfError(err)
 		for _, subTask := range t.DownstreamTaskIds {
-			graph.AddEdge(t.TaskId, subTask, true, nil)
+			err := graph.AddEdge(t.TaskId, subTask, true, nil)
+			utils.ExitIfError(err)
 		}
 	}
 

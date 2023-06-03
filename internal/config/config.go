@@ -102,7 +102,8 @@ func GetActiveProfile() (string, string, error) {
 }
 
 func create(p string) (*os.File, error) {
-	if err := os.MkdirAll(filepath.Dir(p), 0770); err != nil {
+	const OWNER_GROUP_ALL_PERMISSIONS = 0770
+	if err := os.MkdirAll(filepath.Dir(p), OWNER_GROUP_ALL_PERMISSIONS); err != nil {
 		return nil, err
 	}
 	return os.Create(p)
@@ -116,7 +117,7 @@ func GetToken(p ProfileJwt) string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return string(out[:])
+	return string(out)
 }
 
 func BasicAuth(p ProfileUserPassword) string {

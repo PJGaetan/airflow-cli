@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 
 	"github.com/spf13/cobra"
 )
@@ -20,7 +21,7 @@ func NewListImportError() *cobra.Command {
 		Short: "List dags import errors",
 		Run:   cmd,
 	}
-	cmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
+	cmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	cmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-timestamp", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
 	return &cmd
 }

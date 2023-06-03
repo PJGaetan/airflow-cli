@@ -9,6 +9,7 @@ import (
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
@@ -23,7 +24,7 @@ var (
 	OrderBy  string
 )
 
-// listCmd represents the list command
+// NewListInstance represents the list-instance command.
 func NewListInstance() *cobra.Command {
 	listCmd := cobra.Command{
 		Use:   "list-instance",
@@ -33,7 +34,7 @@ func NewListInstance() *cobra.Command {
 	listCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	listCmd.Flags().StringVarP(&DagRunId, "dag-run-id", "r", "", "dag id")
 	listCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
-	listCmd.Flags().IntVarP(&Limit, "limit", "l", 20, "The numbers of items to return.")
+	listCmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	return &listCmd
 }
 
@@ -46,7 +47,7 @@ func list(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	if DagRunId == "" {
@@ -57,7 +58,7 @@ func list(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(run, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagRunId = run.Dag_run_id
+		DagRunId = run.DagRunId
 	}
 
 	responseTask := request.AirflowGetRequest("dags/" + DagId + "/dagRuns/" + DagRunId + "/taskInstances")

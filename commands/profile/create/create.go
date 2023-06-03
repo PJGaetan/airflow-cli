@@ -1,10 +1,8 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package create
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/AlecAivazis/survey/v2"
@@ -14,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// listCmd represents the list command
+// NewCreate represents the create command.
 func NewCreate() *cobra.Command {
 	createCmd := cobra.Command{
 		Use:   "create",
@@ -52,21 +50,28 @@ var qUserPassword = []*survey.Question{
 }
 
 func create(cmd *cobra.Command, args []string) {
-	profile_name := ""
+	profileName := ""
 	prompt := &survey.Input{
 		Message: "Profile name",
 		Default: "default",
 	}
-	survey.AskOne(prompt, &profile_name)
+
+	err := survey.AskOne(prompt, &profileName)
+	utils.ExitIfError(err)
+
+	if profileName == "" {
+		os.Exit(0)
+	}
 
 	profiles := config.GetProfiles()
 	for k := range profiles {
-		if k == profile_name {
+		if k == profileName {
 			override := false
 			prompt := &survey.Confirm{
-				Message: "Profile " + profile_name + " already exists, do you want to override it ?",
+				Message: "Profile " + profileName + " already exists, do you want to override it ?",
 			}
-			survey.AskOne(prompt, &override)
+			err := survey.AskOne(prompt, &override)
+			utils.ExitIfError(err)
 			if !override {
 				utils.Failed("Choosing not to override.\nRerun command to specify another profile name.")
 			}
@@ -77,28 +82,35 @@ func create(cmd *cobra.Command, args []string) {
 	prompt_url := &survey.Input{
 		Message: "Url to airflow REST API.",
 	}
-	survey.AskOne(prompt_url, &url)
+	err = survey.AskOne(prompt_url, &url)
+	utils.ExitIfError(err)
 
-	auth_type := ""
-	auth_prompt := &survey.Select{
+	if url == "" {
+		os.Exit(0)
+	}
+
+	authType := ""
+	authPrompt := &survey.Select{
 		Message: "Chose a way to authentication",
 		Options: []string{"user/password", "jwt token"},
 		Default: "user/password",
 	}
-	survey.AskOne(auth_prompt, &auth_type)
+	err = survey.AskOne(authPrompt, &authType)
+	utils.ExitIfError(err)
+
+	if authType == "" {
+		os.Exit(0)
+	}
 
 	mapProfile := make(map[string]string)
-	if auth_type == "user/password" {
+	if authType == "user/password" {
 		answers := struct {
 			User     string
 			Password string
 		}{}
 
 		err := survey.Ask(qUserPassword, &answers)
-		if err != nil {
-			fmt.Println(err.Error())
-			return
-		}
+		utils.ExitIfError(err)
 
 		mapProfile["url"] = url
 		mapProfile["user"] = answers.User
@@ -110,10 +122,7 @@ func create(cmd *cobra.Command, args []string) {
 		}{}
 
 		err := survey.Ask(qJwt, &answers)
-		if err != nil {
-			fmt.Println(err.Error())
-			return
-		}
+		utils.ExitIfError(err)
 
 		mapProfile["url"] = url
 		mapProfile["token"] = answers.Token
@@ -124,6 +133,7 @@ func create(cmd *cobra.Command, args []string) {
 		fmt.Println("No config file yet.")
 	}
 
-	ini.Default().NewSection(profile_name, mapProfile)
+	errProfile := ini.Default().NewSection(profileName, mapProfile)
+	utils.ExitIfError(errProfile)
 	config.WriteConfig()
 }

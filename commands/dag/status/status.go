@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package status
 
 import (
@@ -17,6 +14,7 @@ import (
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -28,7 +26,9 @@ var (
 	OrderBy  string
 )
 
-// listCmd represents the list command
+const DEFAULT_RETURN_ITEMS = 5
+
+// NewStatus represents the list command.
 func NewStatus() *cobra.Command {
 	statusCmd := cobra.Command{
 		Use:   "status",
@@ -37,7 +37,7 @@ func NewStatus() *cobra.Command {
 	}
 	statusCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	statusCmd.Flags().StringVarP(&DagRunId, "dag-run", "r", "", "dag run id")
-	statusCmd.Flags().IntVarP(&Limit, "limit", "l", 5, "The numbers of items to return. (Default:5).")
+	statusCmd.Flags().IntVarP(&Limit, "limit", "l", DEFAULT_RETURN_ITEMS, "The numbers of items to return.")
 	statusCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
 	return &statusCmd
 }
@@ -51,7 +51,7 @@ func status(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	if DagRunId == "" {
@@ -62,7 +62,7 @@ func status(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(run, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagRunId = run.Dag_run_id
+		DagRunId = run.DagRunId
 	}
 
 	var todo string
@@ -71,7 +71,8 @@ func status(cmd *cobra.Command, args []string) {
 		Options: []string{"View logs", "Exit"},
 	}
 
-	survey.AskOne(promptTodo, &todo)
+	err := survey.AskOne(promptTodo, &todo)
+	utils.ExitIfError(err)
 	if todo == "Exit" {
 		os.Exit(0)
 	}
@@ -112,7 +113,8 @@ func status(cmd *cobra.Command, args []string) {
 			return ""
 		},
 	}
-	survey.AskOne(promptLogs, &taskInstanceId)
+	err = survey.AskOne(promptLogs, &taskInstanceId)
+	utils.ExitIfError(err)
 	responseLogs := request.AirflowGetRequest("dags/"+DagId+"/dagRuns/"+DagRunId+"/taskInstances/"+taskInstanceId+"/logs/"+"1", [2]string{"full_content", "true"})
 	var logs model.Logs
 	if err := json.Unmarshal([]byte(responseLogs), &logs); err != nil {

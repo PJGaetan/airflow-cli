@@ -1,31 +1,15 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package commands
 
 import (
-	"fmt"
-
-	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 
 	"github.com/pjgaetan/airflow-cli/commands/dag"
 	"github.com/pjgaetan/airflow-cli/commands/profile"
 	"github.com/pjgaetan/airflow-cli/commands/task"
 	"github.com/pjgaetan/airflow-cli/internal/flag"
-	"github.com/pjgaetan/airflow-cli/pkg/utils"
 )
 
-var (
-	config  string
-	debug   bool
-	Profile string
-)
-
-func init() {
-	// cobra.OnInitialize(initConfig)
-}
+var Profile string
 
 func NewRootCmd() *cobra.Command {
 	rootCmd := cobra.Command{
@@ -36,7 +20,7 @@ func NewRootCmd() *cobra.Command {
 			return cmd.Help()
 		},
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			checkConfig(cmd, args)
+			checkConfig(cmd)
 		},
 	}
 	rootCmd.PersistentFlags().StringVarP(&flag.Flag, "profile", "p", "default", "Profile used to connect to Airflow")
@@ -49,39 +33,10 @@ func NewRootCmd() *cobra.Command {
 	return &rootCmd
 }
 
-func checkConfig(cmd *cobra.Command, args []string) {
+func checkConfig(cmd *cobra.Command) {
 	subCmd := cmd.Name()
 	if !cmdRequireToken(subCmd) {
 		return
-	}
-
-	// TODO: Put be on when adding config
-	// if err := viper.ReadInConfig(); err != nil {
-	// 	if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-	// 		fmt.Fprintf(os.Stderr, fmt.Sprintf("\u001B[0;31m✗\u001B[0m %s\n", "Missing configuration file.\nRun 'airflow-cli configure' to configure the tool."))
-	// 		os.Exit(1)
-	// 	}
-	// }
-}
-
-func initConfig() {
-	if config != "" {
-		viper.SetConfigFile(config)
-	} else {
-
-		home, err := homedir.Dir()
-		utils.ExitIfError(err)
-
-		viper.AddConfigPath(fmt.Sprintf("%s/%s/%s", home, ".config", ".airflow"))
-		viper.SetConfigName(".config")
-		viper.SetConfigType("yml")
-	}
-
-	viper.AutomaticEnv()
-	viper.SetEnvPrefix("airflow_cli")
-
-	if err := viper.ReadInConfig(); err == nil && debug {
-		fmt.Printf("Using config file: %s\n", viper.ConfigFileUsed())
 	}
 }
 

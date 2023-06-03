@@ -11,8 +11,10 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -24,7 +26,7 @@ var (
 	OrderBy  string
 )
 
-// listCmd represents the list command
+// NewSet represents the set-instance command.
 func NewSet() *cobra.Command {
 	stateCmd := cobra.Command{
 		Use:   "set-instance",
@@ -34,7 +36,7 @@ func NewSet() *cobra.Command {
 	stateCmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
 	stateCmd.Flags().StringVarP(&DagRunId, "dag-run-id", "r", "", "dag id")
 	stateCmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
-	stateCmd.Flags().IntVarP(&Limit, "limit", "l", 20, "The numbers of items to return.")
+	stateCmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	return &stateCmd
 }
 
@@ -47,7 +49,7 @@ func state(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	if DagRunId == "" {
@@ -58,7 +60,7 @@ func state(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(run, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagRunId = run.Dag_run_id
+		DagRunId = run.DagRunId
 	}
 
 	responseTask := request.AirflowGetRequest("dags/" + DagId + "/dagRuns/" + DagRunId + "/taskInstances")
@@ -98,7 +100,8 @@ func state(cmd *cobra.Command, args []string) {
 			return ""
 		},
 	}
-	survey.AskOne(promptTask, &taskId)
+	err := survey.AskOne(promptTask, &taskId)
+	utils.ExitIfError(err)
 	if taskId == "" {
 		return
 	}
@@ -109,7 +112,8 @@ func state(cmd *cobra.Command, args []string) {
 		Message: "What state do you want to state?",
 		Options: []string{"success", "failed"},
 	}
-	survey.AskOne(PromtpState, &state)
+	err = survey.AskOne(PromtpState, &state)
+	utils.ExitIfError(err)
 
 	// Params selections
 	params := []string{}
@@ -118,7 +122,8 @@ func state(cmd *cobra.Command, args []string) {
 		Message: "Who does it needs to apply to?",
 		Options: []string{"include_upstream", "include_downstream"},
 	}
-	survey.AskOne(promptParams, &params)
+	err = survey.AskOne(promptParams, &params)
+	utils.ExitIfError(err)
 	mapParams := make(map[string]any)
 	// Default params
 	mapParams["include_future"] = false

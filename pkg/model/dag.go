@@ -1,13 +1,10 @@
 package model
 
+import "time"
+
 type Dags struct {
 	Dags         []Dag `json:"dags"`
 	TotalEntries int   `json:"total_entries"`
-}
-
-type ResponseDag struct {
-	Response Dags   `json:"response"`
-	Status   string `json:"stat"`
 }
 
 type scheduleInterval struct {
@@ -16,19 +13,21 @@ type scheduleInterval struct {
 }
 
 type Tag struct {
-	Tag map[string]string `json:"value"`
+	Tag string `json:"name"`
 }
 
 type Dag struct {
-	Dag_id            string           `json:"dag_id"`
-	Description       string           `json:"description"`
-	File_token        string           `json:"file_token"`
-	Fileloc           string           `json:"fileloc"`
-	Is_active         bool             `json:"is_active"`
-	Is_paused         bool             `json:"is_paused"`
-	S_subdag          bool             `json:"s_subdag"`
-	Owners            []string         `json:"owners"`
-	Root_dag_id       string           `json:"root_dag_id"`
-	Schedule_interval scheduleInterval `json:"schedule_interval"`
-	Tags              []Tag            `json:"tags"`
+	DagId            string           `json:"dag_id"`
+	Description      string           `json:"description"`
+	FileToken        string           `json:"file_token"`
+	Fileloc          string           `json:"fileloc"`
+	IsActive         bool             `json:"is_active"`
+	IsPaused         bool             `json:"is_paused"`
+	IsSubdag         bool             `json:"s_subdag"`
+	Owners           []string         `json:"owners"`
+	RootDagId        string           `json:"root_dag_id"`
+	ScheduleInterval scheduleInterval `json:"schedule_interval"`
+	Tags             []Tag            `json:"tags"`
+	DefaultView      string           `json:"default_view"`
+	NextDagrun       time.Time        `json:"next_dagrun"`
 }

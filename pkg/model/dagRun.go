@@ -11,13 +11,13 @@ type DagRuns struct {
 }
 
 type DagRun struct {
-	Conf             json.RawMessage `json:"conf"`
-	Dag_id           string          `json:"dag_id"`
-	Dag_run_id       string          `json:"dag_run_id"`
-	External_trigger bool            `json:"external_trigger"`
-	State            string          `json:"state"`
-	Execution_date   time.Time       `json:"execution_date"`
-	Logical_date     time.Time       `json:"logical_date"`
-	Start_date       time.Time       `json:"start_date"`
-	End_date         time.Time       `json:"end_date"`
+	Conf            json.RawMessage `json:"conf"`
+	DagId           string          `json:"dag_id"`
+	DagRunId        string          `json:"dag_run_id"`
+	ExternalTrigger bool            `json:"external_trigger"`
+	State           string          `json:"state"`
+	ExecutionDate   time.Time       `json:"execution_date"`
+	LogicalDate     time.Time       `json:"logical_date"`
+	StartDate       time.Time       `json:"start_date"`
+	EndDate         time.Time       `json:"end_date"`
 }

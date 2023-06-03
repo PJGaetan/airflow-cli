@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// listCmd represents the list command
+// NewList represents the list command.
 func NewList() *cobra.Command {
 	cmd := cobra.Command{
 		Use:   "list",

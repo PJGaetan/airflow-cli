@@ -15,7 +15,7 @@ import (
 
 var DagId string
 
-// triggerCmd represents the list command
+// triggerCmd represents the list command.
 func NewTrigger() *cobra.Command {
 	triggerCmd := cobra.Command{
 		Use:   "trigger",
@@ -35,7 +35,7 @@ func trigger(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 	response := request.AirflowPostRequest("dags/"+DagId+"/dagRuns", `{}`)
 	var dagRun model.DagRuns

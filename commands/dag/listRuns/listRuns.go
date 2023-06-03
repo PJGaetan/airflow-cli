@@ -5,13 +5,14 @@ import (
 	"os"
 	"reflect"
 	"strconv"
-	"time"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 	"github.com/pjgaetan/airflow-cli/api/request"
+	"github.com/pjgaetan/airflow-cli/internal/constant"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
 	"github.com/pjgaetan/airflow-cli/pkg/prompt"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -22,7 +23,7 @@ var (
 	OrderBy string
 )
 
-// listCmd represents the list command
+// NewListRuns represents the list command.
 func NewListRuns() *cobra.Command {
 	cmd := cobra.Command{
 		Use:   "list-runs",
@@ -30,7 +31,7 @@ func NewListRuns() *cobra.Command {
 		Run:   cmd,
 	}
 	cmd.Flags().StringVarP(&DagId, "dag-id", "d", "", "dag id")
-	cmd.Flags().IntVarP(&Limit, "limit", "l", 10, "The numbers of items to return. (Default:10).")
+	cmd.Flags().IntVarP(&Limit, "limit", "l", constant.DEAULT_ITEM_LIMIT, "The numbers of items to return.")
 	cmd.Flags().StringVarP(&OrderBy, "order-by", "o", "-start_date", "The name of the field to order the results by. Prefix a field name with - to reverse the sort order.")
 	return &cmd
 }
@@ -44,7 +45,7 @@ func cmd(cmd *cobra.Command, args []string) {
 		if reflect.DeepEqual(dag, model.Dag{}) {
 			os.Exit(0)
 		}
-		DagId = dag.Dag_id
+		DagId = dag.DagId
 	}
 
 	response := request.AirflowGetRequest("dags/"+DagId+"/dagRuns", [2]string{"limit", strconv.Itoa(Limit)}, [2]string{"order_by", OrderBy})
@@ -68,20 +69,16 @@ func buildTable(dat model.DagRuns) table.Writer {
 		"state",
 		"start_date",
 		"end_date",
-		// "conf",
 	})
 	t.AppendSeparator()
 	for _, s := range dat.DagRun {
 		t.AppendRow([]interface{}{
-			s.Dag_id,
-			s.Dag_run_id,
-			s.External_trigger,
+			s.DagId,
+			s.DagRunId,
+			s.ExternalTrigger,
 			s.State,
-			s.Start_date.Format(time.RFC3339),
-			s.End_date.Format(time.RFC3339),
-			// s.Execution_date,
-			// s.Logical_date,
-			// s.Conf,
+			utils.FormatDate(s.StartDate),
+			utils.FormatDate(s.EndDate),
 		})
 	}
 	return t

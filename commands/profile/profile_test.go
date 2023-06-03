@@ -25,7 +25,10 @@ func TestProfileCmd_no_Args(t *testing.T) {
 	}()
 
 	// back to normal state
-	w.Close()
+	err := w.Close()
+	if err != nil {
+		panic(err)
+	}
 	os.Stdout = old // restoring the real stdout
 	out := <-outC
 

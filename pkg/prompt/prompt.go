@@ -22,7 +22,7 @@ func PromptDag() (model.Dag, error) {
 	}
 	dagIds := make([]string, len(dags.Dags))
 	for index, dag := range dags.Dags {
-		dagIds[index] = dag.Dag_id
+		dagIds[index] = dag.DagId
 	}
 	if len(dags.Dags) == 0 {
 		utils.Failed("No run for this dag.")
@@ -33,12 +33,13 @@ func PromptDag() (model.Dag, error) {
 		Options: dagIds,
 	}
 
-	survey.AskOne(prompt, &dagId)
+	err := survey.AskOne(prompt, &dagId)
+	utils.ExitIfError(err)
 	if dagId == "" {
 		return model.Dag{}, nil
 	}
 	for _, dag := range dags.Dags {
-		if dag.Dag_id == dagId {
+		if dag.DagId == dagId {
 			return dag, nil
 		}
 	}
@@ -55,17 +56,17 @@ func PromptDagRun(dagId, orderBy string, limit int) (model.DagRun, error) {
 
 	// reverse sort to have last run in first
 	sort.Slice(runs, func(i, j int) bool {
-		return runs[i].Start_date.Format(time.RFC3339) > runs[j].Start_date.Format(time.RFC3339)
+		return runs[i].StartDate.Format(time.RFC3339) > runs[j].StartDate.Format(time.RFC3339)
 	})
 
 	dagRunIds := make([]string, len(runs))
 	for index, run := range runs {
-		dagRunIds[index] = run.Dag_run_id
+		dagRunIds[index] = run.DagRunId
 	}
 	if len(runs) == 0 {
 		utils.Failed("No run for this dag.")
 	}
-	fmt.Println(runs[0].Dag_id)
+	fmt.Println(runs[0].DagId)
 
 	var dagRunId string
 	prompt := &survey.Select{
@@ -73,7 +74,7 @@ func PromptDagRun(dagId, orderBy string, limit int) (model.DagRun, error) {
 		Options: dagRunIds,
 		Description: func(value string, index int) string {
 			for _, run := range runs {
-				if run.Dag_run_id == value {
+				if run.DagRunId == value {
 					if run.State == "" {
 						return "none"
 					}
@@ -84,14 +85,15 @@ func PromptDagRun(dagId, orderBy string, limit int) (model.DagRun, error) {
 		},
 	}
 
-	survey.AskOne(prompt, &dagRunId)
+	err := survey.AskOne(prompt, &dagRunId)
+	utils.ExitIfError(err)
 
 	if dagRunId == "" {
 		return model.DagRun{}, nil
 	}
 
 	for _, run := range runs {
-		if run.Dag_run_id == dagRunId {
+		if run.DagRunId == dagRunId {
 			return run, nil
 		}
 	}

@@ -5,6 +5,7 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 )
 
 var lineRE = regexp.MustCompile(`(?m)^`)
@@ -43,10 +44,16 @@ func ExitIfError(err error) {
 		return
 	}
 
-	var msg string
-
-	msg = fmt.Sprintf("Error: %s", err.Error())
+	msg := fmt.Sprintf("Error: %s", err.Error())
 
 	fmt.Fprintf(os.Stderr, "%s\n", msg)
 	os.Exit(1)
+}
+
+// Format a date to string, return empty if isZero.
+func FormatDate(d time.Time) string {
+	if d.IsZero() {
+		return ""
+	}
+	return d.Format(time.RFC3339)
 }
