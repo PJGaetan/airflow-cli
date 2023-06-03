@@ -1,0 +1,104 @@
+project_name: airflow-cli
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - <<: &build_defaults
+      binary: bin/airflow-cli
+      main: ./airflow-cli/main.go
+      ldflags:
+        - -s -w
+        - -X github.com/pjgaetan/airflow-cli/internal/version.Version={{.Version}}
+        - -X github.com/pjgaetan/airflow-cli/internal/version.GitCommit={{.FullCommit}}
+        - -X github.com/pjgaetan/airflow-cli/internal/version.SourceDateEpoch={{.CommitTimestamp}}
+      env:
+        - CGO_ENABLED=0
+    id: macOS
+    goos: [darwin]
+    goarch: [amd64, arm64]
+
+  - <<: *build_defaults
+    id: linux
+    goos: [linux]
+    goarch: [386, arm, amd64, arm64]
+
+  - <<: *build_defaults
+    id: windows
+    goos: [windows]
+    goarch: [amd64]
+
+archives:
+  - id: nix
+    builds: [macOS, linux]
+    <<: &archive_defaults
+      rlcp: true
+      files:
+        - LICENSE
+      name_template: '{{ .ProjectName }}_{{ .Version }}_{{- title .Os }}_{{- if eq .Arch "amd64" }}x86_64{{- else if eq .Arch "386" }}i386{{- else }}{{ .Arch }}{{ end }}{{- if .Arm }}v{{ .Arm }}{{ end }}'
+    wrap_in_directory: true
+    format: tar.gz
+
+  - id: windows
+    builds: [windows]
+    <<: *archive_defaults
+    wrap_in_directory: false
+    format: zip
+checksum:
+  name_template: "checksums.txt"
+  algorithm: sha256
+
+brews:
+  - name: airflow-cli
+    homepage: "https://github.com/pjgaetan/airflow-cli"
+    description: "Interact with airflow REST API from your CLI"
+    license: "MIT"
+
+    ids:
+      - nix
+
+    tap:
+      owner: pjgaetan
+      name: homebrew-pjgaetan
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+
+    custom_block: |
+      head do
+        url "https://github.com/pjgaetan/airflow-cli.git", branch: "main"
+        depends_on "go"
+      end
+
+    install: |
+      if build.head?
+        system "make", "install"
+        bin.install ENV["GOPATH"] + "/bin/airflow-cli"
+      else
+        bin.install File.exist?("bin/airflow-cli") ? "bin/airflow-cli" : "airflow-cli"
+      end
+
+    test: |
+      help_text = shell_output("#{bin}/airflow-cli help")
+      assert_includes help_text, "Airflow CLI"
+
+    commit_author:
+      name: pjgaetan
+
+    commit_msg_template: "Formula update for version {{ .Tag }}"
+
+    # Folder inside the repository to put the formula to.
+    folder: Formula
+
+changelog:
+  # skip: true
+  use: github
+  sort: desc
+  filters:
+    exclude:
+      - "^doc:"
+      - "^dev:"
+      - "^build:"
+      - "^ci:"
+      - "^test:"
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
