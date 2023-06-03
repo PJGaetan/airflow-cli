@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 
 	"github.com/gookit/ini/v2"
@@ -17,6 +18,13 @@ import (
 	"github.com/pjgaetan/airflow-cli/internal/config"
 	"github.com/pjgaetan/airflow-cli/pkg/utils"
 )
+
+type errorResponse struct {
+	Detail       string `json:"detail"`
+	Status       int    `json:"status"`
+	Title        string `json:"title"`
+	ResponseType string `json:"type"`
+}
 
 func MakeRequest(payload, url, method string, header []string) (string, error) {
 	var reader io.Reader
@@ -45,6 +53,17 @@ func MakeRequest(payload, url, method string, header []string) (string, error) {
 
 	bodyBytes, _ := io.ReadAll(resp.Body)
 	bodyString := string(bodyBytes)
+
+	// Success is indicated with 2xx status codes:
+	statusOK := resp.StatusCode >= 200 && resp.StatusCode < 300
+	if !statusOK {
+		var error errorResponse
+		if err := json.Unmarshal([]byte(bodyString), &error); err != nil {
+			panic(err)
+		}
+		utils.Fail("Error status code : " + strconv.Itoa(error.Status))
+		utils.Failed(error.ResponseType + " " + error.Detail)
+	}
 
 	return bodyString, nil
 }
