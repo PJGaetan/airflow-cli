@@ -23,8 +23,11 @@ jobs:
       - name: Install dependencies
         run: make deps
 
-      - name: Run linter
-        run: make lint
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          # Optional: version of golangci-lint to use in form of v1.2 or v1.2.3 or `latest` to use the latest version
+          version: v1.53.2
 
       - name: Run tests
         run: make test
