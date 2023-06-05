@@ -1,0 +1,19 @@
+Interact with tasks
+
+Usage:
+  airflow-cli task [command]
+
+Available Commands:
+  clear-instance Clear task instances
+  list           List task of a specific dag
+  list-instance  List task instances linked to a particular dag run
+  logs           Get logs from task instances
+  set-instance   Set task instances state (success,failed)
+
+Flags:
+  -h, --help   help for task
+
+Global Flags:
+  -p, --profile string   Profile used to connect to Airflow (default "default")
+
+Use "airflow-cli task [command] --help" for more information about a command.

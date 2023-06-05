@@ -7,7 +7,8 @@ The code as been greatly inspired by [glab](https://gitlab.com/gitlab-org/cli/-/
 
 ## Todo 
 - Choose a name
-- Reoganise required module
+- Reoganise required module [x]
+- testing
 - Wrap error and sys exit [x]
 - Correct Select descriptions servey [x]
 - Correctly escape with crtl+d [x]
@@ -104,9 +105,23 @@ make lint
 
 ### Test
 
+#### Airflow server
+
 Use test makefile to spin up any airflow version.
 
 ```sh
  make up VERSION=2.5.3
  ```
+
+#### Golden files
+
+This repository test the behavior of the CLI.
+It stores on disk (so called golden file) the expected output of the command under test.
+
+When the behaviour of a file change, it's good practice to update the golden file:
+```sh
+go test integration/cli_test.go -update
+```
+
+Largely inspired from [lucapette](https://lucapette.me/writing/writing-integration-tests-for-a-go-cli-application/) and [sobyte](https://www.sobyte.net/post/2022-07/go-setup-and-teardown/).
 

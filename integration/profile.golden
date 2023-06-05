@@ -1,0 +1,16 @@
+Create, list, switch airflow profiles.
+
+Usage:
+  airflow-cli profile [command]
+
+Available Commands:
+  create      Create a profile to connect to airflow REST API
+  list        List profiles
+
+Flags:
+  -h, --help   help for profile
+
+Global Flags:
+  -p, --profile string   Profile used to connect to Airflow (default "default")
+
+Use "airflow-cli profile [command] --help" for more information about a command.

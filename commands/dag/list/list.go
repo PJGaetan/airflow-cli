@@ -12,7 +12,6 @@ import (
 	"github.com/pjgaetan/airflow-cli/api/request"
 	"github.com/pjgaetan/airflow-cli/internal/printer"
 	"github.com/pjgaetan/airflow-cli/pkg/model"
-	"github.com/pjgaetan/airflow-cli/pkg/utils"
 
 	"github.com/spf13/cobra"
 )
@@ -45,7 +44,7 @@ func buildTable(dat model.Dags) table.Writer {
 	t.AppendHeader(table.Row{
 		"dag_id",
 		"schedule_interval",
-		"next_dagrun",
+		// "next_dagrun",
 		"is_paused",
 		"tags",
 		"owners",
@@ -62,7 +61,7 @@ func buildTable(dat model.Dags) table.Writer {
 		t.AppendRow([]interface{}{
 			s.DagId,
 			s.ScheduleInterval.Value,
-			utils.FormatDate(s.NextDagrun),
+			// utils.FormatDate(s.NextDagrun),
 			s.IsPaused,
 			tagsFormated,
 			s.Owners,

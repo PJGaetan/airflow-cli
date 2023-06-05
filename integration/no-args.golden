@@ -1,0 +1,19 @@
+Airflow CLI interacting with the REST API that helps you manage your dags, tasks.. from the command line.
+
+Usage:
+  airflow-cli [flags]
+  airflow-cli [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  dag         Interact with Dag resources
+  help        Help about any command
+  profile     Create, list, switch airflow profiles.
+  task        Interact with tasks
+  version     Print the app version information
+
+Flags:
+  -h, --help             help for airflow-cli
+  -p, --profile string   Profile used to connect to Airflow (default "default")
+
+Use "airflow-cli [command] --help" for more information about a command.
