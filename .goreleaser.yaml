@@ -57,7 +57,7 @@ checksum:
   algorithm: sha256
 
 brews:
-  - name: ariflow-cli
+  - name: airflow-cli
     homepage: "https://github.com/pjgaetan/airflow-cli"
     description: "Interact with airflow REST API from your CLI"
     license: "MIT"
