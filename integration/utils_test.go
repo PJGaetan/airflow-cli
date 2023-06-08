@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -43,18 +42,18 @@ func loadFixture(t *testing.T, fixture string) string {
 }
 
 func TestMain(m *testing.M) {
-	err := os.Chdir("..")
-	if err != nil {
-		fmt.Printf("could not change dir: %v", err)
-		os.Exit(1)
-	}
-
-	dir, err := os.Getwd()
-	if err != nil {
-		fmt.Printf("could not get current dir: %v", err)
-	}
-
-	binaryPath = filepath.Join(dir, binaryName)
+	// err := os.Chdir("..")
+	// if err != nil {
+	// 	fmt.Printf("could not change dir: %v", err)
+	// 	os.Exit(1)
+	// }
+	//
+	// dir, err := os.Getwd()
+	// if err != nil {
+	// 	fmt.Printf("could not get current dir: %v", err)
+	// }
+	//
+	// binaryPath = filepath.Join(dir, binaryName)
 	// composeFilePaths := []string{"testdata/docker-compose.yml"}
 	// identifier := strings.ToLower(uuid.New().String())
 	//

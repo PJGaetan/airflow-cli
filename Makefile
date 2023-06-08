@@ -8,21 +8,21 @@ lint:
 	golangci-lint run
 
 
-test: build-with-coverage airflow.server-up
+test: build-with-coverage 
 	@rm -fr .coverdata
 	@mkdir -p .coverdata
-	@go test -v ./... || $(MAKE) airflow.server-down
+	@go test -v ./...
 	@go tool covdata percent -i=.coverdata
-	$(MAKE) airflow.server-down > /dev/null
+	# $(MAKE) airflow.server-down > /dev/null
 
-airflow.server-down:
-	@docker compose down
-	@rm docker-compose.yaml
-
-
-airflow.server-up:
-	@curl --verbose https://airflow.apache.org/docs/apache-airflow/$(VERSION)/docker-compose.yaml > docker-compose.yaml
-	@docker compose up --force-recreate -d --wait
+# airflow.server-down:
+# 	@docker compose down
+# 	@rm docker-compose.yaml
+#
+#
+# airflow.server-up:
+# 	@curl --verbose https://airflow.apache.org/docs/apache-airflow/$(VERSION)/docker-compose.yaml > docker-compose.yaml
+# 	@docker compose up --force-recreate -d --wait
 
 check-coverage: test 
 	@go tool covdata textfmt -i=.coverdata -o profile.txt

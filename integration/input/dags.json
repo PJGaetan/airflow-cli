@@ -1,0 +1,1729 @@
+{
+  "dags": [
+    {
+      "dag_id": "dataset_consumes_1",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.842201+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "Dataset"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        },
+        {
+          "name": "consumes"
+        }
+      ],
+      "timetable_description": "Triggered by datasets"
+    },
+    {
+      "dag_id": "dataset_consumes_1_and_2",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.844804+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "Dataset"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        },
+        {
+          "name": "consumes"
+        }
+      ],
+      "timetable_description": "Triggered by datasets"
+    },
+    {
+      "dag_id": "dataset_consumes_1_never_scheduled",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.845954+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "Dataset"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        },
+        {
+          "name": "consumes"
+        }
+      ],
+      "timetable_description": "Triggered by datasets"
+    },
+    {
+      "dag_id": "dataset_consumes_unknown_never_scheduled",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.847075+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "Dataset"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        }
+      ],
+      "timetable_description": "Triggered by datasets"
+    },
+    {
+      "dag_id": "dataset_produces_1",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.848133+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        },
+        {
+          "name": "produces"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "dataset_produces_2",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59jKlYgFNvYJsrv3YzjJRegSCfAeh0sN0SWhAxcN9DhRc45LmDVaVJMDTPZV-nBrkzrjtl-cDRyizrCC_UUIe0.bxwVYKMIF2FUEo4lJRsXTeJZeI4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_datasets.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.850199+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "dataset-scheduled"
+        },
+        {
+          "name": "produces"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_bash_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DClYgFttQEuX3boyXnIMijQBrv1he8CwJGbhG0DmKPLs_wOqgTTHdmMlWpQ-bMoUTsy1EtBJEqeOQ7nW6H6aeI_0.PKze9YP0j5c64cUuFWBbTNdt_qU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_bash_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.312909+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "0 0 * * *"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        },
+        {
+          "name": "example2"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_datetime_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49DClYhFtpAE-X2Ojn-l-8gSyXA0g-WGzxLQgYuEXRalrb6DUYxWhTThSeNf6UHqzKFHc_xR-zYUv7MyEqlIEodTbrX6V5QcSh5.GrOehdIxFwBsUNCrkfMn998ZXlM",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_datetime_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.868365+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_datetime_operator_2",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49DClYhFtpAE-X2Ojn-l-8gSyXA0g-WGzxLQgYuEXRalrb6DUYxWhTThSeNf6UHqzKFHc_xR-zYUv7MyEqlIEodTbrX6V5QcSh5.GrOehdIxFwBsUNCrkfMn998ZXlM",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_datetime_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.871775+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_datetime_operator_3",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49DClYhFtpAE-X2Ojn-l-8gSyXA0g-WGzxLQgYuEXRalrb6DUYxWhTThSeNf6UHqzKFHc_xR-zYUv7MyEqlIEodTbrX6V5QcSh5.GrOehdIxFwBsUNCrkfMn998ZXlM",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_datetime_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.873806+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_dop_operator_v3",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yzEOgCAMQNG7sEsHB4_TVKxALLYBEuX2DiaMP3nfQdLCQLmeog940UACknew0ZPeq9-g5c6LUbgocpuUXyomjAfFNmOvdIeE_4uHGqpxpa4VV2_DffoAKgI.TIxE1B_kfbqfuGXgWAFpx-6nbBA",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_python_dop_operator_3.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.568570+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-05T20:42:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:43:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:43:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-05T20:42:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "*/1 * * * *"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Every minute"
+    },
+    {
+      "dag_id": "example_branch_labels",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DClYgFtpQEuX3bo6XnIMijQDruFge8CwJGbhG0DWL9N0fYHXSpphuzGR_pRebMoUTs_2IA3sqgTESm9flPqVYI9Q.IkGRP96LKzPRRCpfMx957r_JUGU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_labels.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.940936+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DClYgFtoUEuX3bo6XnIMijQCrXSwPeJaEDFwj6JpF-u4PGHXSpphuzDT-Si82ZQon5vEjGvZUgigZTjGvy33wbSTN.svtxjQ8gB3Hg_f2eSoE4vHpFK1A",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.128099+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        },
+        {
+          "name": "example2"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_branch_python_operator_decorator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7uEsHB49DClQgFtoAiXJ7Ewe2_5K_QZJCgLldLA8YFo8MnB3oHEnqYU7oedCu6G-M1NdKLxZlsgFjX3ANq09WlBoOaTaQl7-Mzu0DevYo7w.-ZOXqqZDiyjD1Xk_lY2BiRxplkA",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_operator_decorator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.481216+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        },
+        {
+          "name": "example2"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_complex",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxT0s_Iz03VT8wsSsvJL9fXy8lPTszRz8lM0i-oLMnIzzPWM9cvzixJ1S1ITM5OTE8thitNrUjMLchJjU9JTC-Gc5LzQVSFXkGlEgDTMSGM.uHjsz8Yzhue_m77ry8YoBjtVk0Q",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_complex.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.042649+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        },
+        {
+          "name": "example2"
+        },
+        {
+          "name": "example3"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_dag_decorator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxNyjEOgCAMAMC_sEsHB59DKlRoLLYBEuX3bsbxknNQtBIgt0P0Bi8aUUB4B5uj6LX6DToPWgzjiZn6V-nBakIhYe5_hERRGw5t3qZ7AaUsI-I.7JH2WdQJv1mpqLxpVGu-KklTKJU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_dag_decorator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.775323+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_dynamic_task_mapping",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJxFyjEOgCAMBdC7uEsHB49DvlixoUAjJMrt3XR8yZvorJkJch1ab3JaA5RUNrLRz1oWt1KTzrMhJERuX-UH2ZT9jth-jIIswXe05DPMpERnY3oBsQ8m1g.nrrL6wc_HLO31Rmr-XrYDnPF_i8",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_dynamic_task_mapping.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.485371+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2022-03-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2022-03-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2022-03-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2022-03-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_external_task_marker_child",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjsOgCAQBcC72MsWFh6HPHEFwvIJkAi3NzaUk8xGLkcm-PpIfklJNhASf1GZ3eV0qJOa77wXmADLbVUeiEVY37BtgUfnmiC6owUdUQPXf6gytw9Tcyh1.RmscSVrA51V2l5qLZPVZmvq1dwU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_external_task_marker_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.741297+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example2"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_external_task_marker_parent",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjsOgCAQBcC72MsWFh6HPHEFwvIJkAi3NzaUk8xGLkcm-PpIfklJNhASf1GZ3eV0qJOa77wXmADLbVUeiEVY37BtgUfnmiC6owUdUQPXf6gytw9Tcyh1.RmscSVrA51V2l5qLZPVZmvq1dwU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_external_task_marker_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.743885+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example2"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_kubernetes_executor",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMBdC7uEsHB49DKn6BUCkBjHJ7N8aXvIWC3iCO9RJ9yYg6FpJ4UBk9aN7MTi12rIVdYo82Kz6-i8Ce7NtEeg7UjI5m8cE9XaspY_kBi74mmg.U9KACzarvEsYD4Xf3diycc73d94",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_kubernetes_executor.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:02.954134+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example3"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_local_kubernetes_executor",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yzEOgCAQBdG70MsWFh6HrPgF4uoSwIi3N7GgnOSNoagniFPZRR-yop6FJK2U3xb1mu1CNTVMmf3BAXVQdD6zwG0c6oh_d8e9olxoqA4d_m5abH7NB3wOKQQ.3dyzpJ14agDjhyYsB3KWPME4VQQ",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_local_kubernetes_executor.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.575211+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example3"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_nested_branch_dag",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7uEsHB49DClQgFkooiXJ748L48_4GSQoB5n6xPGBYPDJwdtDmSFIPc4LmQXtDf2MkXSu9WBqTDRh1RSUdFKzrWH36ybS5fTtXJW8.AdkdsOk6yMXvv1NNsr2Ou38Le18",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_nested_branch_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.030685+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_params_ui_tutorial",
+      "default_view": "grid",
+      "description": "DAG demonstrating various options for a trigger form generated by DAG params",
+      "file_token": ".eJw9yrsNgDAMBcBd6IkLCsaJHmCIhYOtfARsT0d50g2ULDNByq52U1BboaSykL8t2TWFmao0Hh3riYPrX_lBduW44ag_HAW5xi6x9WZFoMHf4QNksiYo.weHHc8S9HLMRikeMf3hFuOTG-rc",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_params_ui_tutorial.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:02.860411+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example_ui"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_passing_params_via_test_command",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOwjAMRuG7dCceGDhO9JOa1KodW3UE9PYwdXr6pLfQ5sYEOV7qHyrqDUoqT4pzbj7u5UEpk2-BtqNzXit_YaFcV_S8EMiU0f89YFnfgjo5Z21uhrGWOJcffb4raA.iBreGUhFQ36ojDT5FzyfPufccCE",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_passing_params_via_test_command.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.575232+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-05T20:43:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:44:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:44:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-05T20:43:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "*/1 * * * *"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Every minute"
+    },
+    {
+      "dag_id": "example_python_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yzEOgCAMQNG7sEsHB49DKlZoLLYBEuX2DiaMP3nfQdZCgFxP0Qe8aEQB4R1s9Kz36jdo3GkxjBcmapPSi8WEwoGpzfinoEYVu1Zvw33z4CUB.JmWZJILTuxzY0pBRmd-sd8jxENs",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_python_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.225180+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_sensor_decorator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DKlQkFtpQEuX3boyXnINbKgGWfrG84FkiMnA5Qee4pe3-ACuDNsX4YCZblT6syhQSZlswaiY9JIrScUj3Ot0PGAclUA.qYY2VJnKan9q5-ZpE_SqU1qnzKQ",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_sensor_decorator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.391519+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_sensors",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59jKlYgFNpQEuX3boyXnIMklQBzf1he8CwBGThfoHMkabs_wPKgTTEUjGSr0odVmc4boy0YNZNuXqf7AdPoIaE.o-Odoe6Q4IkK65vuwlWGhS1KIBw",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_sensors.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:02.950773+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_short_circuit_decorator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgDAIAMC_uFsGB5_TIKIlUmkoRv29m-MlN0CxyoDim9oNSY1QQWWB9kaxc0ozdAkeG9KBO_e_8oO1KecV9_6jF_PIJE6XRF6ZzDHMU3uHDyvJKDg.oPy_BcAetu_97IXRy59pvNm-FGM",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_short_circuit_decorator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.210890+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:43:35.210987+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:43:35.210987+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:43:35.210987+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:43:35.210987+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_short_circuit_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgDAIAMC_uFsGB5_TYEVLpEIoRv29m-MlN0DVRoDsm-gNSbSggPAC9kbVc0ozdA4aDcuBO_W_0oPNhPKKe__Rq3rkwl4ujqxGjqGe7B0-BBwn4Q.cIUYMnipvpUgLZ6r_GZgGaVezhA",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_short_circuit_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.659320+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:43:34.659430+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:43:34.659430+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:43:34.659430+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:43:34.659430+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_skip_dag",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49jKlZoKLaxJMrtjYvjf_kBijYC5OsQvSGKJhQQ3sBGL3rOcQHnTpNhqpjJ_5UebCa07pj9D69sn0Qb4QX0-iHW.yMWQULnKJgaBLRkNqTHqFflgIC0",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_skip_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.399374+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:44:03.399499+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:44:03.399499+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:44:03.399499+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:44:03.399499+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_sla_dag",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49jKlZoLLaxJMrtjQvjf_kBilYC5PsQfSCKJhQQ3sB6K3rNcQHnRpNhOjGTj5VerCa07ph9hAv-EK2HD9IqIV8.QR9Q0o9qTp4mIuZFoFJVFqlLPBI",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_sla_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.120279+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-05T20:40:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:42:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:42:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-05T20:40:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "*/2 * * * *"
+      },
+      "scheduler_lock": null,
+      "tags": [],
+      "timetable_description": "Every 2 minutes"
+    },
+    {
+      "dag_id": "example_subdag_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DClYgFtsARvm9ToyXnIEkhQBzPVgesCwBGTh70NGTXKvdoOVOi2I4MVKblV4syuR2jG2i3f63E6WKXarVYT7xKyTV.DCB9se9zAf9PKyHJZJsl-pseGGo",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_subdag_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.139360+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2022-01-01T00:00:00+00:00",
+      "next_dagrun_create_after": "2022-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2022-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2022-01-01T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@once"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Once, as soon as possible"
+    },
+    {
+      "dag_id": "example_task_group",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_uEsHB59DKlYgFNtQjPJ7N8ZLboEklQBzu1hecCwBGTgfoKMnuTe3g-VOq2IoGMlmpQ-rMvkTo010tOJjk0edjuUHO9ki0w.G3VPVKOmnn5mEkx_tRkpJtu6sjY",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_task_group.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.220190+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:44:03.220299+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:44:03.220299+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:44:03.220299+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:44:03.220299+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_task_group_decorator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DKlQgFNsARvm9G-MlZyBJJcDcLpYXLItHBs4n6BxJ7t0e0POgTdEXjNRXpQ-rMrmAsS8M7MXFJo-6QF4aDmlWp_kBso8m9Q.nrLdFOsMjKN8p6JkCPQFJVI_BT4",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_task_group_decorator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.402384+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:44:03.402474+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:44:03.402474+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:44:03.402474+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:44:03.402474+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "example_time_delta_sensor_async",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7uEsHB49DKlZoLJRQEuX2OjH-l79A0kyA3C7RB5xoQAHhA-roScvmdjDutFYMN0ayudKLuQr5E6PN6Jx_IenojYpp82ijBFfH8gEpqygi.FMT1mRnanrPl1rzqGzHt141Xj08",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_time_delta_sensor_async.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.745134+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_trigger_controller_dag",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9ijEOgCAMAP_CLh0cfA6pWKGxUAIkyu9lYrvLnYGoiQC53qIvWFGPAsInlNGj5t0e0LjTVtA_GKitlT5MRchdGNqSXjkEqs5r7lVFJs5uyzA_Ar0ntg.s3hUJ51HN5PRxW2PvooXwkdSlPE",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_trigger_controller_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.127804+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_create_after": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2021-01-01T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@once"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Once, as soon as possible"
+    },
+    {
+      "dag_id": "example_trigger_target_dag",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7sEsHB49DKtbSWIRAE-X2xoXx530HqWQClHZqecBriaigskMdlsq9-g26GC0V44VMfa70Yq5K4UDuM6wJM7Vg2JjsN1-H-wBjfiX5.tK_5oeE64ddIKWftNYy96wz47Rk",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_trigger_target_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:02.744819+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_weekday_branch_operator",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMQNG7uEsHB49DClYhFNoUEuX2Ojn-l79AkkqA2U6WGxxLRAbOAXSOJG1zO_Q8aFWMBS_q_0oPVmXyB179j2DYYvpsejn9TVS8KBkOMadzeQHMbimp.9CGzaXy8jx9k50MVJt5-UBtO__I",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_branch_day_of_week_operator.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.048132+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T00:00:00+00:00",
+      "next_dagrun_create_after": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@daily"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "At 00:00"
+    },
+    {
+      "dag_id": "example_xcom",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59jaq1AbG0jJMLv3RgvuQDZlAHLe4l9EMUIBaQc4KNle9a4QS2NF0e6MXGdlTuqC-8npjrRyTT6CD9uuiBL.1ZPi6vntF0Dy3TRlSzfJd2h0YuM",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_xcom.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.964003+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_create_after": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_end": "2021-01-01T00:00:00+00:00",
+      "next_dagrun_data_interval_start": "2021-01-01T00:00:00+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "CronExpression",
+        "value": "@once"
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Once, as soon as possible"
+    },
+    {
+      "dag_id": "example_xcom_args",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59jKlYgFNtQEuH3boyXnIMklQBze1g-8CwBGThfoLMneXd_gOVOm2IoGMlWpYFVmc4boy2MIBVbNK_T_fXRIfg.kDUyThzNjSk2RnUV4TBPSf7FsGY",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_xcomargs.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.742407+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "example_xcom_args_with_operators",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59jKlYgFNtQEuH3boyXnIMklQBze1g-8CwBGThfoLMneXd_gOVOm2IoGMlWpYFVmc4boy2MIBVbNK_T_fXRIfg.kDUyThzNjSk2RnUV4TBPSf7FsGY",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_xcomargs.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.744765+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "latest_only",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DKlYkFtrYJsrv3RgvuQCXNAKsz8nyQmTJyMB1Bx1-SV_jBladFsV8YyGblT5sypQOLDbB6GSepPOIOsIPX4cjQg.onKrEJfoeL-_ya_7NrW1ZRJP0xo",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_latest_only.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:03.655232+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-05T16:44:03.655338+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:44:03.655338+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:44:03.655338+00:00",
+      "next_dagrun_data_interval_start": "2023-06-05T16:44:03.655338+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 0,
+        "microseconds": 0,
+        "seconds": 14400
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example2"
+        },
+        {
+          "name": "example3"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "latest_only_with_trigger",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59DKlZoLJRAE-T3bo6XnIOshQC536ITvGhEAeET2rKsdfcHDDbaGsYHE42_0oulCYUL0_ghaDQsaJUVJlsO1jkl6r4t9wFV1iiw.gOoYjZKFsyUaKWBp-m84qQbIlaE",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/example_latest_only_with_trigger.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.477042+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-05T16:43:34.477155+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:43:34.477155+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:43:34.477155+00:00",
+      "next_dagrun_data_interval_start": "2023-06-05T16:43:34.477155+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 0,
+        "microseconds": 0,
+        "seconds": 14400
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example3"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "tutorial",
+      "default_view": "grid",
+      "description": "A simple tutorial DAG",
+      "file_token": ".eJw9yjEOgCAMAMC_sEsHB59jKlZoLLaBGuX3bt58AYpWAuR2iD4QRRMKCG9gw4tec1ygs9NkmE7M1P9KL1YTWnfMHfx2bYwSbYQP75YevQ.ArfoC9JBk0b05doOMsObi6KKehY",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/tutorial.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:35.229921+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": "2023-06-04T20:43:35.230038+00:00",
+      "next_dagrun_create_after": "2023-06-05T20:43:35.230038+00:00",
+      "next_dagrun_data_interval_end": "2023-06-05T20:43:35.230038+00:00",
+      "next_dagrun_data_interval_start": "2023-06-04T20:43:35.230038+00:00",
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": {
+        "__type": "TimeDelta",
+        "days": 1,
+        "microseconds": 0,
+        "seconds": 0
+      },
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": ""
+    },
+    {
+      "dag_id": "tutorial_dag",
+      "default_view": "grid",
+      "description": "DAG tutorial",
+      "file_token": ".eJw9yjEOgCAMAMC_uEsHB59jKlZoLLaBGuX3xsXxkhsgayFArrvoDUE0ooDwCtY96zmFGRo7jYbxwETtr_RgMaFlw9TAL9fKKJ-C9eEFb7IgSA.wA5Nr0qMnJqSSS5rDU8q3pQ5vYU",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/tutorial_dag.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": false,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.391519+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "tutorial_taskflow_api",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjESQEAMBdC76G0KhePsfASZDcnYGNzeaNTvNbTaxgQ5ZrWLktoIJZWB_InV9i71VCW4dYwFC9e_8o3NlfOEpVKcYYdAc6CWjzNckj_NC6qcJCA.9CfcRJOU6SwwKiMXayoQDzX3G-Q",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/tutorial_taskflow_api.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:43:34.659096+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    },
+    {
+      "dag_id": "tutorial_taskflow_api_virtualenv",
+      "default_view": "grid",
+      "description": null,
+      "file_token": ".eJw9yjEOgzAMBdC7sBMPDD1O9BsMWJjYSgwtt69YOr830GYHE6Qtah9KagVKKm_yOzarU3pRl-DRUXas3P-VvzhcOc9YO8UZ1gSaA31_OMMlX9LihHK9kt_DD1lVKM8.hjubAxfnyqAJFJtGDx3uVtXtshs",
+      "fileloc": "/home/airflow/.local/lib/python3.7/site-packages/airflow/example_dags/tutorial_taskflow_api_virtualenv.py",
+      "has_import_errors": false,
+      "has_task_concurrency_limits": false,
+      "is_active": true,
+      "is_paused": true,
+      "is_subdag": false,
+      "last_expired": null,
+      "last_parsed_time": "2023-06-05T20:44:02.741976+00:00",
+      "last_pickled": null,
+      "max_active_runs": 16,
+      "max_active_tasks": 16,
+      "next_dagrun": null,
+      "next_dagrun_create_after": null,
+      "next_dagrun_data_interval_end": null,
+      "next_dagrun_data_interval_start": null,
+      "owners": [
+        "airflow"
+      ],
+      "pickle_id": null,
+      "root_dag_id": null,
+      "schedule_interval": null,
+      "scheduler_lock": null,
+      "tags": [
+        {
+          "name": "example"
+        }
+      ],
+      "timetable_description": "Never, external triggers only"
+    }
+  ],
+  "total_entries": 47
+}
