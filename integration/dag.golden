@@ -1,0 +1,21 @@
+Interact with Dag resources
+
+Usage:
+  airflow-cli dag [command]
+
+Available Commands:
+  graph              Graphviz representation of the dag
+  list               list dags
+  list-import-errors List dags import errors
+  list-runs          List dag runs
+  state              Pause/unpause a dag
+  status             Status of dag runs (tasks & logs)
+  trigger            Trigger dag runs
+
+Flags:
+  -h, --help   help for dag
+
+Global Flags:
+  -p, --profile string   Profile used to connect to Airflow (default "default")
+
+Use "airflow-cli dag [command] --help" for more information about a command.
