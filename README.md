@@ -5,19 +5,11 @@ Cli to interact with you airflow instance using the REST API when you can't ssh 
 
 The code as been greatly inspired by [glab](https://gitlab.com/gitlab-org/cli/-/tree/main) and [jira-cli](https://github.com/ankitpokhrel/jira-cli).
 
-## Todo 
-- Choose a name
-- Reoganise required module
-- Wrap error and sys exit [x]
-- Correct Select descriptions servey [x]
-- Correctly escape with crtl+d [x]
-- Write quickstart README [x]
-- Output DAG with [diagon](https://github.com/ArthurSonzogni/Diagon) and [natural C biding](https://pkg.go.dev/cmd/cgo)
-	- Graph-Easy : https://stackoverflow.com/a/3391213
-
 ## Quickstart
 
 ### Create a new profile 
+
+#### Using the CLI
 
 Create a profile using :
 
@@ -30,6 +22,32 @@ you can choose between two kind of authentication :
 - jwt auth
 
 In case of a jwt auth you can choose to use a shell command to retrieve the jwt token instead of directly providing it.
+
+#### Editing the config file
+
+The config file is stored in `~/.config/.airflow/.config`.
+You can edit it directly.
+
+```
+; classic airflow authentication
+[default]
+user = airflow
+password = airflow
+url = http://0.0.0.0:8080/api/v1/
+
+; auth across a proxy via jwt
+[token]
+token = secrettoken
+url = https://some.server:8080/path/to/proxy
+
+; you can retrieve the token via any shell command
+[shell]
+isShell = true
+token = cat file_with_token
+url = https://some.server:8080/path/to/proxy
+
+
+```
 
 ## Commands
 
@@ -110,3 +128,12 @@ Use test makefile to spin up any airflow version.
  make up VERSION=2.5.3
  ```
 
+## Todo 
+- Choose a name
+- Reoganise required module
+- Wrap error and sys exit [x]
+- Correct Select descriptions servey [x]
+- Correctly escape with crtl+d [x]
+- Write quickstart README [x]
+- Output DAG with [diagon](https://github.com/ArthurSonzogni/Diagon) and [natural C biding](https://pkg.go.dev/cmd/cgo)
+	- Graph-Easy : https://stackoverflow.com/a/3391213
