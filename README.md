@@ -93,6 +93,27 @@ airflow-cli dag graph -d tutorial_dag | graph-easy --from=graphviz --as=boxart
 
 ```
 
+### Dag run grid
+
+Get a grid view similar to airflow UI.
+
+```sh
+go run airflow-cli/main.go dag grid -d example_bash_operator
+example_bash_operator    v v v v v v
+------------------------------------
+also_run_this            v v v v v v
+runme_0                  v v v v v v
+runme_1                  v v v v v v
+runme_2                  v v v v v v
+run_after_loop           v v v v v v
+this_will_skip           - - - - - -
+run_this_last            - - - - - -
+                                   |
+                               2023-06-24
+                               00:00:00
+```
+
+
 ### Task
 
 ```sh
