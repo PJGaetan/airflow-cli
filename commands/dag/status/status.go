@@ -123,6 +123,10 @@ func status(cmd *cobra.Command, args []string) {
 
 	log := strings.Trim(string(logs.Content), "[]()\"")
 	for _, line := range strings.Split(log, "\\n") {
-		fmt.Println(strings.Trim(line, "\\"))
+		line = strings.ReplaceAll(line, "\\\\", "\\")
+		line = strings.Trim(line, "\\")
+		fmt.Println(line)
 	}
+	// s := fmt.Sprintf("%#v", logs.Content)
+	// fmt.Println(s)
 }

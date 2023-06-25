@@ -8,10 +8,10 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strconv"
 	"strings"
 
-	"github.com/gookit/ini/v2"
 	"golang.org/x/exp/maps"
 	"golang.org/x/exp/slices"
 
@@ -64,7 +64,12 @@ func MakeRequest(payload, url, method string, header []string) (string, error) {
 		if err := json.Unmarshal([]byte(bodyString), &error); err != nil {
 			panic(err)
 		}
-		utils.Fail("Error status code : " + strconv.Itoa(error.Status))
+		utils.Fail("Error status code : " + strconv.Itoa(resp.StatusCode))
+
+		// for airflow behind jwt, the response can have any schema
+		if reflect.DeepEqual(error, errorResponse{}) {
+			utils.Failed(bodyString)
+		}
 		utils.Failed(error.ResponseType + " " + error.Detail)
 	}
 
@@ -72,26 +77,10 @@ func MakeRequest(payload, url, method string, header []string) (string, error) {
 }
 
 func AirflowGetRequest(endpoint string, params ...[2]string) json.RawMessage {
-	profile_name, auth_method, err := config.GetActiveProfile()
-	if err != nil {
-		log.Fatal("Error ", err)
-	}
-	var header [1]string
-
-	switch auth_method {
-	case "user/password":
-		profile := config.GetUserPasswordProfile(profile_name)
-		header = [1]string{"Authorization: Basic " + config.BasicAuth(profile)}
-	case "jwt":
-		profile := config.GetJwtProfile(profile_name)
-		token := config.GetToken(profile)
-		header = [1]string{"Authorization: Bearer " + token}
-	default:
-		utils.Failed("no such possibility")
-	}
+	header := [1]string{config.AuthorizationHeader}
 
 	// emptiness has been checked in GetActiveProfile
-	baseUrl := ini.String(profile_name + ".url")
+	baseUrl := config.Url
 	if !strings.HasSuffix(baseUrl, "/") {
 		baseUrl += "/"
 	}
@@ -131,26 +120,12 @@ func AirflowGetRequest(endpoint string, params ...[2]string) json.RawMessage {
 }
 
 func AirflowPostRequest(endpoint string, payload string) json.RawMessage {
-	profile_name, auth_method, err := config.GetActiveProfile()
-	if err != nil {
-		log.Fatal("Error ", err)
-	}
 	var header [2]string
-	switch auth_method {
-	case "user/password":
-		profile := config.GetUserPasswordProfile(profile_name)
-		header[0] = "Authorization: Basic " + config.BasicAuth(profile)
-	case "jwt":
-		profile := config.GetJwtProfile(profile_name)
-		token := config.GetToken(profile)
-		header[0] = "Authorization: Bearer " + token
-	default:
-		utils.Failed("no such possibility")
-	}
+	header[0] = config.AuthorizationHeader
 	header[1] = "Content-Type: application/json"
 
 	// emptiness has been checked in GetActiveProfile
-	baseUrl := ini.String(profile_name + ".url")
+	baseUrl := config.Url
 	if !strings.HasSuffix(baseUrl, "/") {
 		baseUrl += "/"
 	}
@@ -182,26 +157,12 @@ func AirflowPostRequest(endpoint string, payload string) json.RawMessage {
 }
 
 func AirflowPatchRequest(endpoint string, payload string, params ...[2]string) json.RawMessage {
-	profile_name, auth_method, err := config.GetActiveProfile()
-	if err != nil {
-		log.Fatal("Error ", err)
-	}
 	var header [2]string
-	switch auth_method {
-	case "user/password":
-		profile := config.GetUserPasswordProfile(profile_name)
-		header[0] = "Authorization: Basic " + config.BasicAuth(profile)
-	case "jwt":
-		profile := config.GetJwtProfile(profile_name)
-		token := config.GetToken(profile)
-		header[0] = "Authorization: Bearer " + token
-	default:
-		utils.Failed("no such possibility")
-	}
+	header[0] = config.AuthorizationHeader
 	header[1] = "Content-Type: application/json"
 
 	// emptiness has been checked in GetActiveProfile
-	baseUrl := ini.String(profile_name + ".url")
+	baseUrl := config.Url
 	if !strings.HasSuffix(baseUrl, "/") {
 		baseUrl += "/"
 	}
