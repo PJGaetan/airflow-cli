@@ -5,6 +5,7 @@ package dag
 
 import (
 	"github.com/pjgaetan/airflow-cli/commands/dag/graph"
+	"github.com/pjgaetan/airflow-cli/commands/dag/grid"
 	"github.com/pjgaetan/airflow-cli/commands/dag/list"
 	"github.com/pjgaetan/airflow-cli/commands/dag/listImportError"
 	"github.com/pjgaetan/airflow-cli/commands/dag/listRuns"
@@ -29,5 +30,6 @@ func NewDag() *cobra.Command {
 	dagCmd.AddCommand(listImportError.NewListImportError())
 	dagCmd.AddCommand(state.NewState())
 	dagCmd.AddCommand(graph.NewGraph())
+	dagCmd.AddCommand(grid.NewGrid())
 	return &dagCmd
 }

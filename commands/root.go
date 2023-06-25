@@ -1,16 +1,19 @@
 package commands
 
 import (
+	"log"
+
+	"github.com/gookit/ini/v2"
 	"github.com/spf13/cobra"
 
 	"github.com/pjgaetan/airflow-cli/commands/dag"
 	"github.com/pjgaetan/airflow-cli/commands/profile"
 	"github.com/pjgaetan/airflow-cli/commands/task"
 	"github.com/pjgaetan/airflow-cli/commands/version"
+	"github.com/pjgaetan/airflow-cli/internal/config"
 	"github.com/pjgaetan/airflow-cli/internal/flag"
+	"github.com/pjgaetan/airflow-cli/pkg/utils"
 )
-
-var Profile string
 
 func NewRootCmd() *cobra.Command {
 	rootCmd := cobra.Command{
@@ -21,7 +24,7 @@ func NewRootCmd() *cobra.Command {
 			return cmd.Help()
 		},
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			checkConfig(cmd)
+			setConfig(cmd)
 		},
 	}
 	rootCmd.PersistentFlags().StringVarP(&flag.Flag, "profile", "p", "default", "Profile used to connect to Airflow")
@@ -35,11 +38,27 @@ func NewRootCmd() *cobra.Command {
 	return &rootCmd
 }
 
-func checkConfig(cmd *cobra.Command) {
+func setConfig(cmd *cobra.Command) {
 	subCmd := cmd.Name()
 	if !cmdRequireToken(subCmd) {
 		return
 	}
+	profile_name, auth_method, err := config.GetActiveProfile()
+	if err != nil {
+		log.Fatal("Error ", err)
+	}
+	switch auth_method {
+	case "user/password":
+		profile := config.GetUserPasswordProfile(profile_name)
+		config.AuthorizationHeader = "Authorization: Basic " + config.BasicAuth(profile)
+	case "jwt":
+		profile := config.GetJwtProfile(profile_name)
+		token := config.GetToken(profile)
+		config.AuthorizationHeader = "Authorization: Bearer " + token
+	default:
+		utils.Failed("no such possibility")
+	}
+	config.Url = ini.String(profile_name + ".url")
 }
 
 func cmdRequireToken(cmd string) bool {

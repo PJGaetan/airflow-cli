@@ -16,7 +16,11 @@ import (
 	"golang.org/x/exp/slices"
 )
 
-var config = ""
+var (
+	config              = ""
+	AuthorizationHeader string
+	Url                 string
+)
 
 type ProfileUserPassword struct {
 	url      string
