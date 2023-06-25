@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"sort"
 	"strconv"
 	"time"
@@ -98,4 +99,93 @@ func PromptDagRun(dagId, orderBy string, limit int) (model.DagRun, error) {
 		}
 	}
 	return model.DagRun{}, errors.New("No such a dagRunId error")
+}
+
+func PromptSetTaskInstanceState(dagId, dagRunId string) {
+	responseTask := request.AirflowGetRequest("dags/" + dagId + "/dagRuns/" + dagRunId + "/taskInstances")
+	var taskInstance model.TaskInstances
+	if err := json.Unmarshal([]byte(responseTask), &taskInstance); err != nil {
+		panic(err)
+	}
+
+	instances := taskInstance.TaskInstance
+	// reverse sort to have last run in first
+	sort.Slice(instances, func(i, j int) bool {
+		return instances[i].StartDate.Format(time.RFC3339) > instances[j].StartDate.Format(time.RFC3339)
+	})
+	taskInstanceIds := make([]string, len(instances))
+	for index, task := range instances {
+		taskInstanceIds[index] = task.TaskId
+	}
+	if len(instances) == 0 {
+		fmt.Println("No task in this dag for this dag run.")
+	}
+	fmt.Println(dagRunId)
+
+	// Task selection
+	var taskId string
+	promptTask := &survey.Select{
+		Message: "What task do you want to set?",
+		Options: taskInstanceIds,
+		Description: func(value string, index int) string {
+			for _, i := range instances {
+				if i.TaskId == value {
+					if i.State == "" {
+						return "none"
+					}
+					return i.State
+				}
+			}
+			return ""
+		},
+	}
+	err := survey.AskOne(promptTask, &taskId)
+	utils.ExitIfError(err)
+	if taskId == "" {
+		return
+	}
+
+	// State selection
+	var state string
+	PromtpState := &survey.Select{
+		Message: "What state do you want to state?",
+		Options: []string{"success", "failed"},
+	}
+	err = survey.AskOne(PromtpState, &state)
+	utils.ExitIfError(err)
+
+	// Params selections
+	params := []string{}
+
+	promptParams := &survey.MultiSelect{
+		Message: "Who does it needs to apply to?",
+		Options: []string{"include_upstream", "include_downstream"},
+	}
+	err = survey.AskOne(promptParams, &params)
+	utils.ExitIfError(err)
+	mapParams := make(map[string]any)
+	// Default params
+	mapParams["include_future"] = false
+	mapParams["include_past"] = false
+	mapParams["include_downstream"] = false
+	mapParams["include_upstream"] = false
+	mapParams["dag_run_id"] = dagRunId
+
+	for _, p := range params {
+		mapParams[p] = true
+	}
+	mapParams["new_state"] = state
+	mapParams["task_id"] = taskId
+	mapParams["dry_run"] = false
+	jsonParams, err := json.Marshal(mapParams)
+	if err != nil {
+		log.Fatal("Error ", err)
+	}
+
+	response := request.AirflowPostRequest("dags/"+dagId+"/updateTaskInstancesState", string(jsonParams))
+	var dagRun model.DagRuns
+	if err := json.Unmarshal([]byte(response), &dagRun); err != nil {
+		panic(err)
+	}
+	fmt.Println(string(response))
 }
